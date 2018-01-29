@@ -1,59 +1,82 @@
 package com.app.android.data.source.remote.core
 
-import com.app.android.BuildConfig
-import com.app.android.pref.Pref
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 /**
- * API access management class
+ *
+ * @author at-vinhhuynh
  */
-object ApiClient {
+open class ApiClient private constructor(url: String? = null) {
 
-    private const val TIMEOUT_READ = 20000
-    private const val TIMEOUT_WRITE = 20000
-    private const val HEADER_AUTH = "X-Authorization"
-    private const val AUTH_PREFIX = "Bearer "
+    internal var token: String? = null
+    // TODO Update base url
+    private var baseUrl: String = if (url == null || url.isEmpty()) "BASE URL" else url
 
-    val API: Api by lazy {
-        val httpClient = OkHttpClient.Builder()
+    companion object : SingletonHolder<ApiClient, String>(::ApiClient)
 
-        httpClient.addInterceptor { chain ->
-            val request = chain.request().newBuilder()
+    val service: ApiService
+        get() {
+            return createService()
+        }
 
-            val accessToken = Pref.accessToken
-
-            if (accessToken.isNotBlank()) {
-                // Pass access token to request header
-                request.addHeader(HEADER_AUTH, AUTH_PREFIX + accessToken)
+    private fun createService(): ApiService {
+        val httpClientBuilder = OkHttpClient.Builder()
+        httpClientBuilder.interceptors().add(Interceptor { chain ->
+            val original = chain.request()
+            // Request customization: add request headers
+            val requestBuilder = original.newBuilder()
+                    .method(original.method(), original.body())
+            if (token != null) {
+                requestBuilder.addHeader("Authorization", "Bearer $token")
             }
-            chain.proceed(request.build())
-        }
-
-        if (BuildConfig.DEBUG) {
-            httpClient.addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
-        }
-
-        httpClient.readTimeout(TIMEOUT_READ.toLong(), TimeUnit.MILLISECONDS)
-        httpClient.writeTimeout(TIMEOUT_WRITE.toLong(), TimeUnit.MILLISECONDS)
-
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        })
+        val client = httpClientBuilder.build()
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.API_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder()
-                        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                        .create()))
-                .client(httpClient.build())
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CustomCallAdapterFactory.create())
+                .client(client)
                 .build()
+        return retrofit.create(ApiService::class.java)
+    }
+}
 
-        retrofit.create(Api::class.java)
+/**
+ * Use this class to create singleton object with argument
+ */
+open class SingletonHolder<out T, in A>(private var creator: (A?) -> T) {
+    @kotlin.jvm.Volatile private var instance: T? = null
+
+    /**
+     * Generate instance for T class with argument A
+     */
+    fun getInstance(arg: A?): T {
+        val i = instance
+        if (i != null) {
+            return i
+        }
+
+        return synchronized(this) {
+            val i2 = instance
+            if (i2 != null) {
+                i2
+            } else {
+                val created = creator(arg)
+                instance = created
+                created
+            }
+        }
+    }
+
+    /**
+     * Clear current instance
+     */
+    fun clearInstance() {
+        instance = null
     }
 }
