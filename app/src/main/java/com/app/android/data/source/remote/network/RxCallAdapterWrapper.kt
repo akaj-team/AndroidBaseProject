@@ -1,7 +1,7 @@
-package com.app.android.data.source.remote.core
+package com.app.android.data.source.remote.network
 
 import com.app.android.data.model.BusEvent
-import com.app.android.utils.BaseRxCallAdapterWrapper
+import com.app.android.data.source.util.BaseRxCallAdapterWrapper
 import okhttp3.ResponseBody
 import retrofit2.*
 import java.lang.reflect.Type

@@ -1,4 +1,4 @@
-package com.app.android.utils
+package com.app.android.data.source.util
 
 import com.uniqlo.circle.data.source.remote.network.CustomCallback
 import retrofit2.Call

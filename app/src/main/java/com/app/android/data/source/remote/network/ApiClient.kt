@@ -1,4 +1,4 @@
-package com.app.android.data.source.remote.core
+package com.app.android.data.source.remote.network
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,8 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class ApiClient private constructor(url: String? = null) {
 
     internal var token: String? = null
-    // TODO Update base url
-    private var baseUrl: String = if (url == null || url.isEmpty()) "BASE URL" else url
+    private var baseUrl: String = if (url == null || url.isEmpty()) "https://api.github.com" else url
 
     companion object : SingletonHolder<ApiClient, String>(::ApiClient)
 

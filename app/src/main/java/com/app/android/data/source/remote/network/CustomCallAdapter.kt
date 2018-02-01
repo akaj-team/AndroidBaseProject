@@ -1,8 +1,8 @@
 package com.uniqlo.circle.data.source.remote.network
 
 import com.app.android.data.model.BusEvent
-import com.app.android.data.source.remote.core.ApiException
-import com.app.android.data.source.remote.core.RxBus
+import com.app.android.data.source.remote.network.ApiException
+import com.app.android.data.source.remote.network.RxBus
 import okhttp3.Request
 import okhttp3.ResponseBody
 import retrofit2.*

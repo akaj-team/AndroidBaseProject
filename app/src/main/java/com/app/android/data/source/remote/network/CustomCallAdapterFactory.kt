@@ -1,4 +1,4 @@
-package com.app.android.data.source.remote.core
+package com.app.android.data.source.remote.network
 
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

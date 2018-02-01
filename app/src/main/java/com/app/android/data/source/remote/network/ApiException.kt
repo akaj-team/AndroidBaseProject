@@ -1,4 +1,4 @@
-package com.app.android.data.source.remote.core
+package com.app.android.data.source.remote.network
 
 import com.google.gson.annotations.SerializedName
 
