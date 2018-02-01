@@ -11,7 +11,6 @@ import org.jetbrains.anko.setContentView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
-    private val loginRepository = LoginRepository()
     private val ui = MainActivityUI()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
