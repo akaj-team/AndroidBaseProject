@@ -3,8 +3,8 @@ package com.app.android.ui.main
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.util.Log.d
 import com.app.android.data.source.LoginRepository
+import com.app.android.data.source.remote.response.LoginResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.setContentView
@@ -18,16 +18,16 @@ class MainActivity : AppCompatActivity() {
         ui.setContentView(this)
         viewModel = MainActivityViewModel(LoginRepository())
         viewModel.getProfile()
-                .map {
-                    d("VVVV",Thread.currentThread().name)
-                    it
-                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d("VVVV", it.name)
-                }, {
-                    Log.d("VVVV", "Throwable: " + it)
-                })
+                .subscribe(this::handleGetProfileSucess, this::handleGetProfileError)
+    }
+
+    private fun handleGetProfileSucess(loginResponse: LoginResponse) {
+        Log.d("VVVV", loginResponse.name)
+    }
+
+    private fun handleGetProfileError(throwable: Throwable) {
+        Log.d("VVVV", throwable.message)
     }
 }
