@@ -1,2 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Login screen-->
+    <string name="login_activity_edt_username_hint">Corporate e-mail</string>
+    <string name="login_activity_edt_password_hint">Password</string>
+    <string name="login_activity_tv_next">Next</string>
+    <string name="login_activity_tv_forgot_password">Forgot yours password?</string>
+    <string name="login_activity_tv_sign_in">Sign in</string>
+    <string name="login_activity_tv_sub_message">Good to see you again</string>
 </resources>
