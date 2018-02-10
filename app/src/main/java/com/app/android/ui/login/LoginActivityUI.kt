@@ -20,9 +20,8 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
 
     internal lateinit var tvNext: TextView
     internal lateinit var progressBar: ProgressBar
-
-    private lateinit var edtUsername: EditText
-    private lateinit var edtPassword: EditText
+    internal lateinit var edtUsername: EditText
+    internal lateinit var edtPassword: EditText
 
     override fun createView(ui: AnkoContext<LoginActivity>) = with(ui) {
         relativeLayout {

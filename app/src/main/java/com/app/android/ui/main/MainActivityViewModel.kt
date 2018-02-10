@@ -10,8 +10,8 @@ import io.reactivex.Single
  * @author at-vinhhuynh
  */
 class MainActivityViewModel(val loginRepository: LoginRepository) {
-    internal fun getProfile(): Single<LoginResponse> {
-        Log.d("VVVV", "Thread: " + Thread.currentThread().name)
-        return loginRepository.getProfile()
-    }
+//    internal fun getProfile(): Single<LoginResponse> {
+//        Log.d("VVVV", "Thread: " + Thread.currentThread().name)
+//        return loginRepository.getProfile()
+//    }
 }

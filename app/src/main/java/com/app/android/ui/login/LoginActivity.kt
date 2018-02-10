@@ -8,7 +8,7 @@ import android.widget.ProgressBar
 import com.app.android.R
 import com.app.android.data.source.LocalRepository
 import com.app.android.data.source.LoginRepository
-import com.app.android.data.source.remote.response.UserResponse
+import com.app.android.data.source.remote.response.RegisterResponse
 import com.app.android.extension.observeOnUiThread
 import com.app.android.ui.main.MainActivity
 import com.uniqlo.circle.ui.base.BaseActivity
@@ -50,13 +50,14 @@ class LoginActivity : BaseActivity() {
 
     internal fun onClickListener(view: View) {
         (view == ui.tvNext).let {
-            loginViewModel.login()
+            loginViewModel.createUser(getString(R.string.FireBaseApiKey), ui.edtUsername.text.toString().trim(),
+                    ui.edtPassword.text.toString().trim())
                     .observeOnUiThread()
                     .subscribe(this::handleLoginSuccess, this::handleLoginError)
         }
     }
 
-    private fun handleLoginSuccess(user: UserResponse) {
+    private fun handleLoginSuccess(user: RegisterResponse) {
         startActivity<MainActivity>()
     }
 

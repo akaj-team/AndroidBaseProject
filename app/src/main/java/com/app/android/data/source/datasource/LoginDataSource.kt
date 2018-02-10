@@ -1,7 +1,7 @@
 package com.app.android.data.source.datasource
 
-import com.app.android.data.source.remote.response.LoginResponse
-import com.app.android.data.source.remote.response.UserResponse
+import com.app.android.data.source.remote.request.RegisterRequestBody
+import com.app.android.data.source.remote.response.RegisterResponse
 import io.reactivex.Single
 
 /**
@@ -10,17 +10,5 @@ import io.reactivex.Single
  */
 interface LoginDataSource {
 
-    /**
-     * This method get github profile
-     *
-     * @param none
-     */
-    fun getProfile(): Single<LoginResponse>
-
-    /**
-     * This method use to login
-     *
-     * @param none
-     */
-    fun login(): Single<UserResponse>
+    fun createUser(key: String, body: RegisterRequestBody): Single<RegisterResponse>
 }

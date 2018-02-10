@@ -3,7 +3,8 @@ package com.app.android.ui.login
 import android.util.Patterns
 import com.app.android.data.source.LocalRepository
 import com.app.android.data.source.LoginRepository
-import com.app.android.data.source.remote.response.UserResponse
+import com.app.android.data.source.remote.request.RegisterRequestBody
+import com.app.android.data.source.remote.response.RegisterResponse
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
@@ -15,12 +16,12 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val l
 
     internal val progressBarStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
-    internal fun login(): Single<UserResponse> {
+    internal fun createUser(key: String, email: String, password: String): Single<RegisterResponse> {
         progressBarStatus.onNext(true)
-        return loginRepository.login()
+        return loginRepository.createUser(key, RegisterRequestBody(email, password))
                 .doOnSuccess {
                     progressBarStatus.onNext(false)
-                    saveAccessToken(it.accessToken)
+                    saveAccessToken(it.idToken)
                 }
                 .doOnError {
                     progressBarStatus.onNext(false)

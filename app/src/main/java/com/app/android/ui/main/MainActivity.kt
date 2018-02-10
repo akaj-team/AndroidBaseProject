@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ui.setContentView(this)
         viewModel = MainActivityViewModel(LoginRepository())
-        viewModel.getProfile()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleGetProfileSucess, this::handleGetProfileError)
+//        viewModel.getProfile()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(this::handleGetProfileSucess, this::handleGetProfileError)
     }
 
     private fun handleGetProfileSucess(loginResponse: LoginResponse) {
