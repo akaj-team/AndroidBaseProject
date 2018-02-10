@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity() {
     }
 
     internal fun onTextChangeListener(email: String, password: String) {
-        if (loginViewModel.isEnableNextButton(email, password)) {
+        if (loginViewModel.isEnableNextButton(email, password) && loginViewModel.isValidateEmail(email)) {
             ui.tvNext.isEnabled = true
             ui.tvNext.textColor = ContextCompat.getColor(this, android.R.color.holo_red_light)
         } else {

@@ -1,11 +1,13 @@
 package com.app.android.ui.login
 
 import android.support.v4.content.ContextCompat
+import android.text.InputType
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.app.android.R
+import com.app.android.extension.hideKeyboard
 import com.app.android.extension.onTextChangeListener
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
@@ -36,6 +38,7 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
 
                 onClick {
                     owner.onClickListener(it!!)
+                    hideKeyboard(ctx)
                 }
             }.lparams {
                 alignParentRight()
@@ -67,6 +70,8 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
                 id = R.id.login_activity_edt_username
                 hint = resources.getString(R.string.login_activity_edt_username_hint)
                 hintTextColor = ContextCompat.getColor(ctx, android.R.color.darker_gray)
+                maxLines = 1
+                inputType = InputType.TYPE_CLASS_TEXT
                 textSize = px2dip(dimen(R.dimen.login_edt_input_text_size))
                 textColor = ContextCompat.getColor(ctx, android.R.color.holo_red_light)
             }.lparams(matchParent, wrapContent) {
@@ -80,6 +85,8 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
                 id = R.id.login_activity_edt_password
                 hint = resources.getString(R.string.login_activity_edt_password_hint)
                 hintTextColor = ContextCompat.getColor(ctx, android.R.color.darker_gray)
+                maxLines = 1
+                inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 textSize = px2dip(dimen(R.dimen.login_edt_input_text_size))
                 textColor = ContextCompat.getColor(ctx, android.R.color.holo_red_light)
             }.lparams(matchParent, wrapContent) {

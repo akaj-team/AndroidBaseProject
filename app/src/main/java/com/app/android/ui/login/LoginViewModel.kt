@@ -1,5 +1,6 @@
 package com.app.android.ui.login
 
+import android.util.Patterns
 import com.app.android.data.source.LocalRepository
 import com.app.android.data.source.LoginRepository
 import com.app.android.data.source.remote.response.UserResponse
@@ -32,5 +33,9 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val l
 
     internal fun isEnableNextButton(email: String, password: String): Boolean {
         return !email.isBlank() && !password.isBlank()
+    }
+
+    internal fun isValidateEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }
