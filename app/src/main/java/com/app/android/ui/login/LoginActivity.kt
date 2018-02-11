@@ -15,6 +15,7 @@ import com.uniqlo.circle.ui.base.BaseActivity
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.textColor
+import org.jetbrains.anko.toast
 
 /**
  * Copyright © 2017 AsianTech inc.
@@ -62,7 +63,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun handleLoginError(t: Throwable) {
-
+        toast("create account failure")
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) {
