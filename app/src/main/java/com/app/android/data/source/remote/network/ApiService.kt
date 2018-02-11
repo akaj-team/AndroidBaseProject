@@ -13,6 +13,12 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
+    /**
+     * This method use to create new user
+     *
+     * @param key firebase api key
+     * @param requestBody body
+     */
     @POST("/identitytoolkit/v3/relyingparty/signupNewUser")
     fun createUser(@Query("key") key: String, @Body requestBody: RegisterRequestBody): Single<RegisterResponse>
 }
