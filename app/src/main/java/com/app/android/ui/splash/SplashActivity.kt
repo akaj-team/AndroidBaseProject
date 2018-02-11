@@ -31,6 +31,7 @@ class SplashActivity : BaseActivity() {
             } else {
                 startActivity<MainActivity>()
             }
+            finish()
         }, DELAY)
     }
 

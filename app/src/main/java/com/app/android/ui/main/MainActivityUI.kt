@@ -1,8 +1,7 @@
 package com.app.android.ui.main
 
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.relativeLayout
+import com.app.android.pref.Pref
+import org.jetbrains.anko.*
 
 /**
  *
@@ -11,7 +10,11 @@ import org.jetbrains.anko.relativeLayout
 class MainActivityUI : AnkoComponent<MainActivity> {
     override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
         relativeLayout {
-            
+            textView {
+                text = "Token:" + Pref.accessToken
+            }.lparams {
+                centerInParent()
+            }
         }
     }
 }
