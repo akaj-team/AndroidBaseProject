@@ -59,6 +59,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun handleLoginSuccess(user: RegisterResponse) {
+        finish()
         startActivity<MainActivity>()
     }
 
