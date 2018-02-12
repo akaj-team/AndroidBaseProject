@@ -16,7 +16,7 @@ import org.jetbrains.anko.startActivity
 class SplashActivity : BaseActivity() {
 
     companion object {
-        val DELAY = 3000L
+        const val DELAY = 3000L
     }
 
     private val ui = SplashActivityUI()

@@ -28,11 +28,10 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
             lparams(matchParent, matchParent)
             backgroundColor = android.R.color.white
 
-            tvNext = textView {
+            tvNext = textView(R.string.login_activity_tv_next) {
                 id = R.id.login_activity_tv_next
                 textColor = ContextCompat.getColor(ctx, R.color.red_blur)
                 textSize = px2dip(dimen(R.dimen.login_tv_next_text_size))
-                text = resources.getText(R.string.login_activity_tv_next)
                 isEnabled = false
 
                 onClick {
@@ -44,20 +43,18 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
                 padding = dimen(R.dimen.login_tv_next_padding)
             }
 
-            textView {
+            textView(R.string.login_activity_tv_sign_in) {
                 id = R.id.login_activity_tv_sign_in
                 textColor = ContextCompat.getColor(ctx, android.R.color.black)
-                text = resources.getString(R.string.login_activity_tv_sign_in)
                 textSize = px2dip(dimen(R.dimen.login_tv_sign_in_text_size))
             }.lparams {
                 centerHorizontally()
                 topMargin = dimen(R.dimen.login_tv_sign_in_margin_top)
             }
 
-            textView {
+            textView(R.string.login_activity_tv_sub_message) {
                 id = R.id.login_activity_tv_sub_message
                 textColor = ContextCompat.getColor(ctx, android.R.color.darker_gray)
-                text = resources.getString(R.string.login_activity_tv_sub_message)
                 textSize = px2dip(dimen(R.dimen.login_tv_sub_message_text_size))
             }.lparams {
                 centerHorizontally()
@@ -95,11 +92,10 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
                 topMargin = dimen(R.dimen.login_edt_password_margin_top)
             }
 
-            textView {
+            textView(R.string.login_activity_tv_forgot_password) {
                 id = R.id.login_activity_tv_forgot_password
                 textSize = px2dip(dimen(R.dimen.login_tv_forgot_password_text_size))
                 textColor = ContextCompat.getColor(ctx, android.R.color.holo_red_light)
-                text = resources.getString(R.string.login_activity_tv_forgot_password)
             }.lparams {
                 alignParentBottom()
                 margin = dimen(R.dimen.login_layout_margin)

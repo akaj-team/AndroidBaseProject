@@ -12,9 +12,7 @@ class SplashActivityUI : AnkoComponent<SplashActivity> {
     override fun createView(ui: AnkoContext<SplashActivity>) = with(ui) {
         relativeLayout {
             backgroundColor = ContextCompat.getColor(ctx, android.R.color.white)
-            textView {
-                text = resources.getString(R.string.app_name)
-            }.lparams {
+            textView(R.string.app_name).lparams {
                 centerInParent()
             }
         }

@@ -20,10 +20,9 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val l
         progressBarStatus.onNext(true)
         return loginRepository.createUser(key, RegisterRequestBody(email, password))
                 .doOnSuccess {
-                    progressBarStatus.onNext(false)
                     saveAccessToken(it.idToken)
                 }
-                .doOnError {
+                .doFinally {
                     progressBarStatus.onNext(false)
                 }
     }
