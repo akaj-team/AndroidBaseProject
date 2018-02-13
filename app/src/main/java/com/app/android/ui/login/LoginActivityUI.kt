@@ -26,7 +26,7 @@ class LoginActivityUI : AnkoComponent<LoginActivity> {
     override fun createView(ui: AnkoContext<LoginActivity>) = with(ui) {
         relativeLayout {
             lparams(matchParent, matchParent)
-            backgroundColor = android.R.color.white
+            backgroundColor = ContextCompat.getColor(ctx, android.R.color.white)
 
             tvNext = textView(R.string.login_activity_tv_next) {
                 id = R.id.login_activity_tv_next

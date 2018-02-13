@@ -32,10 +32,10 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val l
     }
 
     internal fun isEnableNextButton(email: String, password: String): Boolean {
-        return !email.isBlank() && !password.isBlank()
+        return isValidateEmail(email) && !password.isBlank()
     }
 
-    internal fun isValidateEmail(email: String): Boolean {
+    private fun isValidateEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }
