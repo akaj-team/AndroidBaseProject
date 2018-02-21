@@ -12,10 +12,7 @@ import com.app.android.data.source.remote.response.RegisterResponse
 import com.app.android.extension.observeOnUiThread
 import com.app.android.ui.main.MainActivity
 import com.uniqlo.circle.ui.base.BaseActivity
-import org.jetbrains.anko.setContentView
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.textColor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 
 /**
  * Copyright © 2017 AsianTech inc.
@@ -40,12 +37,14 @@ class LoginActivity : BaseActivity() {
     }
 
     internal fun onTextChangeListener(email: String, password: String) {
-        if (loginViewModel.isEnableNextButton(email, password)) {
-            ui.tvNext.isEnabled = true
-            ui.tvNext.textColor = ContextCompat.getColor(this, android.R.color.holo_red_light)
-        } else {
-            ui.tvNext.isEnabled = false
-            ui.tvNext.textColor = ContextCompat.getColor(this, R.color.red_blur)
+        ui.tvNext.run {
+            if (loginViewModel.isEnableNextButton(email, password)) {
+                isEnabled = true
+                textColor = ContextCompat.getColor(ctx, android.R.color.holo_red_light)
+            } else {
+                isEnabled = false
+                textColor = ContextCompat.getColor(ctx, R.color.red_blur)
+            }
         }
     }
 

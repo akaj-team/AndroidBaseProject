@@ -1,13 +1,16 @@
 package com.app.android.ui.splash
 
 import android.os.Bundle
-import android.os.Handler
+import com.app.android.extension.observeOnUiThread
 import com.app.android.pref.Pref
 import com.app.android.ui.login.LoginActivity
 import com.app.android.ui.main.MainActivity
 import com.uniqlo.circle.ui.base.BaseActivity
+import io.reactivex.Observable
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Copyright © 2018 AsianTech inc.
@@ -24,17 +27,19 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ui.setContentView(this)
-        val handler = Handler()
-        handler.postDelayed({
-            if (Pref.accessToken.isBlank()) {
-                startActivity<LoginActivity>()
-            } else {
-                startActivity<MainActivity>()
-            }
-            finish()
-        }, DELAY)
     }
 
     override fun onBindViewModel() {
+        Observable.just(true).delay(DELAY, TimeUnit.MILLISECONDS)
+                .observeOnUiThread()
+                .doOnNext {
+                    if (Pref.accessToken.isBlank()) {
+                        startActivity<LoginActivity>()
+                    } else {
+                        startActivity<MainActivity>()
+                    }
+                    finish()
+                }
+                .subscribe()
     }
 }
