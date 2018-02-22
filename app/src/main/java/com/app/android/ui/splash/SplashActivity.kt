@@ -1,12 +1,11 @@
 package com.app.android.ui.splash
 
 import android.os.Bundle
-import com.app.android.extension.observeOnUiThread
 import com.app.android.pref.Pref
 import com.app.android.ui.login.LoginActivity
 import com.app.android.ui.main.MainActivity
 import com.uniqlo.circle.ui.base.BaseActivity
-import io.reactivex.Observable
+import io.reactivex.Maybe
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 import java.util.concurrent.TimeUnit
@@ -18,10 +17,6 @@ import java.util.concurrent.TimeUnit
  */
 class SplashActivity : BaseActivity() {
 
-    companion object {
-        const val DELAY = 3000L
-    }
-
     private val ui = SplashActivityUI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +25,9 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun onBindViewModel() {
-        Observable.just(true).delay(DELAY, TimeUnit.MILLISECONDS)
-                .observeOnUiThread()
-                .doOnNext {
+        Maybe.empty<Unit>()
+                .delay(3, TimeUnit.SECONDS)
+                .doOnComplete {
                     if (Pref.accessToken.isBlank()) {
                         startActivity<LoginActivity>()
                     } else {
