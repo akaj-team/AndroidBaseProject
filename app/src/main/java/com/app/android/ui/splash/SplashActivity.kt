@@ -1,8 +1,6 @@
 package com.app.android.ui.splash
 
 import android.os.Bundle
-import com.app.android.pref.Pref
-import com.app.android.ui.login.LoginActivity
 import com.app.android.ui.main.MainActivity
 import com.uniqlo.circle.ui.base.BaseActivity
 import io.reactivex.Maybe
@@ -28,11 +26,7 @@ class SplashActivity : BaseActivity() {
         Maybe.empty<Unit>()
                 .delay(3, TimeUnit.SECONDS)
                 .doOnComplete {
-                    if (Pref.accessToken.isBlank()) {
-                        startActivity<LoginActivity>()
-                    } else {
-                        startActivity<MainActivity>()
-                    }
+                    startActivity<MainActivity>()
                     finish()
                 }
                 .subscribe()

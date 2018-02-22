@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Login screen-->
-    <dimen name="login_tv_sign_in_text_size">40dp</dimen>
-    <dimen name="login_tv_next_text_size">20dp</dimen>
-    <dimen name="login_tv_sub_message_text_size">20dp</dimen>
-    <dimen name="login_tv_forgot_password_text_size">18dp</dimen>
-    <dimen name="login_tv_sign_in_margin_top">50dp</dimen>
-    <dimen name="login_tv_sub_message_margin_top">10dp</dimen>
-    <dimen name="login_edt_input_text_size">16dp</dimen>
-    <dimen name="login_edt_username_margin_top">40dp</dimen>
-    <dimen name="login_edt_password_margin_top">5dp</dimen>
-    <dimen name="login_layout_margin">15dp</dimen>
-    <dimen name="login_tv_next_padding">10dp</dimen>
+    <!--Main screen-->
+    <dimen name="item_task_tv_title_text_size">17dp</dimen>
+    <dimen name="item_task_tv_description_text_size">15dp</dimen>
+    <dimen name="item_task_tv_status_text_size">15dp</dimen>
 </resources>

@@ -10,8 +10,4 @@ import com.app.android.pref.Pref
  */
 class LocalRepository : LocalDataSource {
 
-    override fun saveAccessToken(accessToken: String) {
-        Pref.accessToken = accessToken
-    }
-
 }

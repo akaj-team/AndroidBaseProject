@@ -5,10 +5,5 @@ package com.app.android.data.source.datasource
  * @author at-vinhhuynh
  */
 interface LocalDataSource {
-    /**
-     * This method save user access token
-     *
-     * @param accessToken user access token
-     */
-    fun saveAccessToken(accessToken: String)
+
 }
