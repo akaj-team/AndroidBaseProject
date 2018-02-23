@@ -27,7 +27,7 @@ class MainActivity : BaseActivity() {
                 viewModel.progressBarStatus
                         .observeOnUiThread()
                         .subscribe(this::handleProgressBarStatus),
-                //Update search list view
+                //Update task list
                 viewModel.updateListTask
                         .observeOnUiThread()
                         .subscribe(this::handleUpdateListTask))
