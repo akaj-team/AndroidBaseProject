@@ -4,4 +4,5 @@
     <dimen name="item_task_tv_title_text_size">17dp</dimen>
     <dimen name="item_task_tv_description_text_size">15dp</dimen>
     <dimen name="item_task_tv_status_text_size">15dp</dimen>
+    <dimen name="item_task_padding">5dp</dimen>
 </resources>

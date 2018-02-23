@@ -1,6 +1,6 @@
 package com.app.android.data.source.datasource
 
-import com.app.android.data.source.remote.response.TaskListResponse
+import com.app.android.data.model.Task
 import io.reactivex.Observable
 
 /**
@@ -15,5 +15,5 @@ interface TaskDataSource {
      * @param key firebase api key
      * @param requestBody body
      */
-    fun getListTask(): Observable<TaskListResponse>
+    fun getListTask(): Observable<List<Task>>
 }

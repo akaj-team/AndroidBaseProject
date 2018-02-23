@@ -3,7 +3,6 @@ package com.app.android.ui.main
 import android.support.v7.util.DiffUtil
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
-import com.app.android.data.source.remote.response.TaskListResponse
 import com.uniqlo.circle.ui.base.Diff
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -15,8 +14,8 @@ import io.reactivex.subjects.PublishSubject
  * @author at-vinhhuynh
  */
 class MainActivityViewModel(private val taskRepository: TaskRepository) {
-    internal var progressBarStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
-    private val taskObservable = PublishSubject.create<Unit>()
+    internal var progressBarStatus = BehaviorSubject.create<Boolean>()
+    internal val taskObservable = PublishSubject.create<List<Task>>()
     internal val updateListTask = PublishSubject.create<DiffUtil.DiffResult>()
     internal var tasks = mutableListOf<Task>()
 
@@ -28,10 +27,10 @@ class MainActivityViewModel(private val taskRepository: TaskRepository) {
         taskObservable
                 .observeOn(Schedulers.computation())
                 .flatMap {
-                    getTasksApi()
+                    getTasksFromApi()
                 }
                 .doOnNext {
-                    val diff = Diff(tasks, it.tasks)
+                    val diff = Diff(tasks, it)
                             .areItemsTheSame { oldItem, newItem ->
                                 oldItem.id == newItem.id
                             }
@@ -42,19 +41,23 @@ class MainActivityViewModel(private val taskRepository: TaskRepository) {
                             .calculateDiff()
 
                     tasks.clear()
-                    tasks.addAll(it.tasks)
+                    tasks.addAll(it)
                     updateListTask.onNext(diff)
                 }
                 .subscribe()
     }
 
     internal fun getTasks() {
-        taskObservable.onNext(Unit)
+        taskObservable.onNext(tasks)
     }
 
-    private fun getTasksApi():
-            Observable<TaskListResponse> = taskRepository
+    private fun getTasksFromApi():
+            Observable<List<Task>> = taskRepository
             .getListTask()
-            .doOnSubscribe { progressBarStatus.onNext(true) }
-            .doFinally { progressBarStatus.onNext(false) }
+            .doOnSubscribe {
+                progressBarStatus.onNext(true)
+            }
+            .doFinally {
+                progressBarStatus.onNext(false)
+            }
 }

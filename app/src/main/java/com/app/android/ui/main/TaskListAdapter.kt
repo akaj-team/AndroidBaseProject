@@ -69,6 +69,7 @@ class TaskListAdapter(val tasks: MutableList<Task>)
             val view = with(ui) {
                 verticalLayout {
                     lparams(wrapContent, wrapContent)
+                    padding = dimen(R.dimen.item_task_padding)
 
                     textView {
                         id = R.id.item_task_title

@@ -48,7 +48,6 @@ class MainActivityUI(tasks: MutableList<Task>) : AnkoComponent<MainActivity> {
                 recyclerView {
                     lparams(matchParent, matchParent)
                     layoutManager = LinearLayoutManager(ctx)
-                    backgroundResource = android.R.color.darker_gray
                     taskListAdapter.onItemClick = {
                         owner.eventTaskItemClicked()
                     }
