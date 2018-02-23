@@ -29,17 +29,23 @@ class MainActivityViewModel(private val taskRepository: TaskRepository) {
                 .observeOn(Schedulers.computation())
                 .flatMap {
                     getTasksApi()
-                }.doOnNext {
-            val diff = Diff(tasks, it.tasks)
-                    .areItemsTheSame { oldItem, newItem ->
-                        oldItem.id == newItem.id
-                    }
-                    .calculateDiff()
+                }
+                .doOnNext {
+                    val diff = Diff(tasks, it.tasks)
+                            .areItemsTheSame { oldItem, newItem ->
+                                oldItem.id == newItem.id
+                            }
+                            .areContentsTheSame { oldItem, newItem ->
+                                oldItem.title == newItem.title
+                                oldItem.description == newItem.description
+                            }
+                            .calculateDiff()
 
-            tasks.clear()
-            tasks.addAll(it.tasks)
-            updateListTask.onNext(diff)
-        }.subscribe()
+                    tasks.clear()
+                    tasks.addAll(it.tasks)
+                    updateListTask.onNext(diff)
+                }
+                .subscribe()
     }
 
     internal fun getTasks() {

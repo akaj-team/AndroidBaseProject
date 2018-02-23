@@ -38,9 +38,11 @@ class MainActivity : BaseActivity() {
     }
 
     internal fun eventTaskItemClicked() {
+        TODO("event click on item")
     }
 
     internal fun eventAddNewTaskClicked() {
+        TODO("add new task")
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) {
