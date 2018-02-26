@@ -1,19 +1,24 @@
 package com.app.android.data.source.remote.network
 
-import com.app.android.data.source.remote.response.LoginResponse
+import com.app.android.data.source.remote.request.RegisterRequestBody
+import com.app.android.data.source.remote.response.RegisterResponse
 import io.reactivex.Single
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  *
  * @author at-vinhhuynh
  */
 interface ApiService {
+
     /**
-     * This method get github profile
+     * This method use to create new user
      *
-     * @param none
+     * @param key firebase api key
+     * @param requestBody body
      */
-    @GET("user?access_token=???")
-    fun getProfile(): Single<LoginResponse>
+    @POST("/identitytoolkit/v3/relyingparty/signupNewUser")
+    fun createUser(@Query("key") key: String, @Body requestBody: RegisterRequestBody): Single<RegisterResponse>
 }

@@ -1,6 +1,7 @@
 package com.app.android.data.source.datasource
 
-import com.app.android.data.source.remote.response.LoginResponse
+import com.app.android.data.source.remote.request.RegisterRequestBody
+import com.app.android.data.source.remote.response.RegisterResponse
 import io.reactivex.Single
 
 /**
@@ -10,9 +11,10 @@ import io.reactivex.Single
 interface LoginDataSource {
 
     /**
-     * This method get github profile
+     * This method use to create new user
      *
-     * @param none
+     * @param key firebase api key
+     * @param requestBody body
      */
-    fun getProfile(): Single<LoginResponse>
+    fun createUser(key: String, body: RegisterRequestBody): Single<RegisterResponse>
 }

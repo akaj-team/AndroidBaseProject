@@ -1,7 +1,9 @@
 package com.app.android.data.source.remote.network
 
+import com.app.android.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class ApiClient private constructor(url: String? = null) {
 
     internal var token: String? = null
-    private var baseUrl: String = if (url == null || url.isEmpty()) "https://api.github.com" else url
+    private var baseUrl: String = if (url == null || url.isEmpty()) "https://www.googleapis.com" else url
 
     companion object : SingletonHolder<ApiClient, String>(::ApiClient)
 
@@ -23,6 +25,9 @@ open class ApiClient private constructor(url: String? = null) {
 
     private fun createService(): ApiService {
         val httpClientBuilder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            httpClientBuilder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        }
         httpClientBuilder.interceptors().add(Interceptor { chain ->
             val original = chain.request()
             // Request customization: add request headers

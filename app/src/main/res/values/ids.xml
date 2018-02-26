@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--View ids for LoginActivity -->
+    <item name="login_activity_edt_username" type="id" />
+    <item name="login_activity_edt_password" type="id" />
+    <item name="login_activity_tv_next" type="id" />
+    <item name="login_activity_tv_sign_in" type="id" />
+    <item name="login_activity_tv_sub_message" type="id" />
+    <item name="login_activity_tv_forgot_password" type="id" />
+</resources>
