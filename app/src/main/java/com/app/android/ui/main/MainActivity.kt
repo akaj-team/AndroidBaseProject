@@ -1,32 +1,60 @@
 package com.app.android.ui.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import com.app.android.data.source.LoginRepository
-import com.app.android.data.source.remote.response.LoginResponse
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import android.support.v7.util.DiffUtil
+import android.view.View
+import com.app.android.data.source.TaskRepository
+import com.app.android.extension.observeOnUiThread
+import com.uniqlo.circle.ui.base.BaseActivity
 import org.jetbrains.anko.setContentView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+    private lateinit var ui: MainActivityUI
     private lateinit var viewModel: MainActivityViewModel
-    private val ui = MainActivityUI()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = MainActivityViewModel(TaskRepository())
+        ui = MainActivityUI(viewModel.tasks)
         ui.setContentView(this)
-        viewModel = MainActivityViewModel(LoginRepository())
-        viewModel.getProfile()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleGetProfileSucess, this::handleGetProfileError)
+        viewModel.getTasks()
     }
 
-    private fun handleGetProfileSucess(loginResponse: LoginResponse) {
-        Log.d("VVVV", loginResponse.name)
+    override fun onBindViewModel() {
+        addDisposables(
+                //Update progress bar status
+                viewModel.progressBarStatus
+                        .observeOnUiThread()
+                        .subscribe(this::handleProgressBarStatus),
+                //Update task list
+                viewModel.updateListTask
+                        .observeOnUiThread()
+                        .subscribe(this::handleUpdateListTask))
     }
 
-    private fun handleGetProfileError(throwable: Throwable) {
-        Log.d("VVVV", throwable.message)
+    private fun handleProgressBarStatus(isShow: Boolean) = if (isShow) {
+        ui.progressBar.visibility = View.VISIBLE
+    } else {
+        ui.run {
+            progressBar.visibility = View.GONE
+            swipeRefreshLayout.run {
+                isRefreshing = false
+            }
+        }
+    }
+
+    private fun handleUpdateListTask(diff: DiffUtil.DiffResult) {
+        diff.dispatchUpdatesTo(ui.taskListAdapter)
+    }
+
+    internal fun handleSwipeRefreshLayoutOnRefresh() {
+        viewModel.getTasks()
+    }
+
+    internal fun eventTaskItemClicked() {
+    }
+
+    internal fun eventAddNewTaskClicked() {
     }
 }

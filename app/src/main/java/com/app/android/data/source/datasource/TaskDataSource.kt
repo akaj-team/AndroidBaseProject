@@ -1,18 +1,16 @@
-package com.app.android.data.source.remote.network
+package com.app.android.data.source.datasource
 
 import com.app.android.data.model.Task
 import io.reactivex.Observable
-import retrofit2.http.GET
 
 /**
  *
  * @author at-vinhhuynh
  */
-interface ApiService {
+interface TaskDataSource {
 
     /**
      * This method use to get list task
      */
-    @GET("api/tasks")
-    fun getTasks(): Observable<List<Task>>
+    fun getListTask(): Observable<List<Task>>
 }
