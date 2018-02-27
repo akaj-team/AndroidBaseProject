@@ -33,14 +33,13 @@ class MainActivity : BaseActivity() {
                         .subscribe(this::handleUpdateListTask))
     }
 
-    private fun handleProgressBarStatus(isShow: Boolean) {
-        when (isShow) {
-            true -> ui.progressBar.visibility = View.VISIBLE
-            else -> {
-                ui.progressBar.visibility = View.GONE
-                ui.swipeRefreshLayout.run {
-                    isRefreshing = false
-                }
+    private fun handleProgressBarStatus(isShow: Boolean) = if (isShow) {
+        ui.progressBar.visibility = View.VISIBLE
+    } else {
+        ui.run {
+            progressBar.visibility = View.GONE
+            swipeRefreshLayout.run {
+                isRefreshing = false
             }
         }
     }
