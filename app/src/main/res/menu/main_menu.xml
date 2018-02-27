@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/add_task"
-        android:title="@string/menu_add_task" />
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:title="@string/menu_add_task"
+        app:showAsAction="always" />
 </menu>

@@ -10,9 +10,7 @@ import io.reactivex.Observable
  *
  * @author at-vinhhuynh
  */
-class TaskRemoteDataSource(private val apiService: ApiService) : TaskDataSource {
-
-    constructor() : this(ApiClient.getInstance(null).service)
+class TaskRemoteDataSource(private val apiService: ApiService = ApiClient.getInstance().service) : TaskDataSource {
 
     override fun getListTask(): Observable<List<Task>> = apiService.getTasks()
 }

@@ -1,6 +1,6 @@
 package com.app.android.ui.main
 
-import android.support.v4.content.ContextCompat
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +25,7 @@ class TaskListAdapter(val tasks: MutableList<Task>)
             = TaskItemUI().createView(AnkoContext.create(parent.context, parent, false)).tag as? TaskItemViewHolder
 
     override fun onBindViewHolder(holder: TaskItemViewHolder?, position: Int) {
-        holder?.onBind()
+        holder?.onBind(position)
     }
 
     /**
@@ -46,17 +46,17 @@ class TaskListAdapter(val tasks: MutableList<Task>)
         /**
          * Bind data to view holder.
          */
-        fun onBind() {
-            with(tasks[adapterPosition]) {
+        fun onBind(position: Int) {
+            with(tasks[position]) {
                 tvTitle.text = title
                 tvDescription.text = description
                 tvStatus.run {
                     if (isDone == 1) {
-                        text = resources.getString(R.string.task_done)
-                        textColor = ContextCompat.getColor(context, android.R.color.holo_green_light)
+                        textResource = R.string.task_done
+                        textColor = Color.GREEN
                     } else {
-                        text = resources.getString(R.string.task_doing)
-                        textColor = ContextCompat.getColor(context, android.R.color.holo_red_light)
+                        textResource = R.string.task_doing
+                        textColor = Color.RED
                     }
                 }
             }
@@ -74,14 +74,14 @@ class TaskListAdapter(val tasks: MutableList<Task>)
                     textView {
                         id = R.id.item_task_title
                         maxLines = 1
-                        textColor = ContextCompat.getColor(ctx, android.R.color.black)
+                        textColor = Color.BLACK
                         textSize = px2dip(dimen(R.dimen.item_task_tv_title_text_size))
                     }
 
                     textView {
                         id = R.id.item_task_description
                         maxLines = 1
-                        textColor = ContextCompat.getColor(ctx, android.R.color.darker_gray)
+                        textColor = Color.GRAY
                         textSize = px2dip(dimen(R.dimen.item_task_tv_description_text_size))
                     }
 

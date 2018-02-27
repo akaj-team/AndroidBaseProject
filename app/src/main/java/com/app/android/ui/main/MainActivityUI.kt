@@ -1,6 +1,6 @@
 package com.app.android.ui.main
 
-import android.support.v4.content.ContextCompat
+import android.graphics.Color
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -9,6 +9,7 @@ import com.app.android.R
 import com.app.android.data.model.Task
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
+import org.jetbrains.anko.appcompat.v7.titleResource
 import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
@@ -21,17 +22,17 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 class MainActivityUI(tasks: MutableList<Task>) : AnkoComponent<MainActivity> {
 
     internal lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    internal val taskListAdapter = TaskListAdapter(tasks)
     internal lateinit var progressBar: ProgressBar
+    internal val taskListAdapter = TaskListAdapter(tasks)
 
     override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
         relativeLayout {
             lparams(matchParent, matchParent)
-            backgroundColor = ContextCompat.getColor(ctx, android.R.color.white)
+            backgroundColor = Color.WHITE
 
             toolbar {
                 id = R.id.main_activity_tool_bar
-                title = resources.getString(R.string.main_activity_title)
+                titleResource = R.string.main_activity_title
                 inflateMenu(R.menu.main_menu)
 
                 onMenuItemClick { item ->

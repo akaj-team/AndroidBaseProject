@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class ApiClient private constructor(url: String? = null) {
 
     internal var token: String? = null
-    private var baseUrl: String = if (url == null || url.isEmpty()) "http://172.17.29.7:8080" else url
+    private var baseUrl: String = if (url == null || url.isEmpty()) "http://172.17.29.7:8080/" else url
 
     companion object : SingletonHolder<ApiClient, String>(::ApiClient)
 
@@ -59,7 +59,7 @@ open class SingletonHolder<out T, in A>(private var creator: (A?) -> T) {
     /**
      * Generate instance for T class with argument A
      */
-    fun getInstance(arg: A?): T {
+    fun getInstance(arg: A? = null): T {
         val i = instance
         if (i != null) {
             return i

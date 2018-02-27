@@ -11,8 +11,8 @@ import retrofit2.http.GET
 interface ApiService {
 
     /**
-     * This method use to create new user
+     * This method use to get list task
      */
-    @GET("/api/tasks")
+    @GET("api/tasks")
     fun getTasks(): Observable<List<Task>>
 }

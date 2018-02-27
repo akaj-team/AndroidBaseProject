@@ -11,9 +11,6 @@ interface TaskDataSource {
 
     /**
      * This method use to get list task
-     *
-     * @param key firebase api key
-     * @param requestBody body
      */
     fun getListTask(): Observable<List<Task>>
 }
