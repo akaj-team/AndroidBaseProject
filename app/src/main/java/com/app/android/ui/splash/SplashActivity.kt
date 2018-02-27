@@ -3,7 +3,7 @@ package com.app.android.ui.splash
 import android.os.Bundle
 import com.app.android.ui.main.MainActivity
 import com.uniqlo.circle.ui.base.BaseActivity
-import io.reactivex.Maybe
+import io.reactivex.Completable
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 import java.util.concurrent.TimeUnit
@@ -23,12 +23,10 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun onBindViewModel() {
-        Maybe.empty<Unit>()
-                .delay(3, TimeUnit.SECONDS)
-                .doOnComplete {
+        Completable.timer(1, TimeUnit.SECONDS)
+                .subscribe {
                     startActivity<MainActivity>()
                     finish()
                 }
-                .subscribe()
     }
 }
