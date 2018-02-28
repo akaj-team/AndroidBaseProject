@@ -14,4 +14,6 @@ class TaskRepository : TaskDataSource {
     private val taskRemoteDataSource: TaskRemoteDataSource = TaskRemoteDataSource()
 
     override fun getListTask(): Observable<List<Task>> = taskRemoteDataSource.getListTask()
+
+    override fun createTask(task: Task): Observable<Task> = taskRemoteDataSource.createTask(task)
 }

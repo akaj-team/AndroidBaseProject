@@ -13,4 +13,6 @@ import io.reactivex.Observable
 class TaskRemoteDataSource(private val apiService: ApiService = ApiClient.getInstance().service) : TaskDataSource {
 
     override fun getListTask(): Observable<List<Task>> = apiService.getTasks()
+
+    override fun createTask(task: Task): Observable<Task> = apiService.createTask(task)
 }

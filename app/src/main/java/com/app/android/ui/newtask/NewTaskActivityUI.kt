@@ -36,7 +36,7 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
                 hintResource = R.string.newTaskHintTitle
                 inputType = InputType.TYPE_CLASS_TEXT
                 textSize = px2dip(dimen(R.dimen.newTaskTvTitleTextSize))
-                singleLine = true
+                maxLines = 1
 
                 onEditorAction { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -52,7 +52,7 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
                 hintResource = R.string.newTaskHintDescription
                 inputType = InputType.TYPE_CLASS_TEXT
                 textSize = px2dip(dimen(R.dimen.newTaskTvDescriptionTextSize))
-                singleLine = true
+                maxLines = 1
 
                 onEditorAction { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_DONE) {

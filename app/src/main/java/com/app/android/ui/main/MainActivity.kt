@@ -13,14 +13,13 @@ import org.jetbrains.anko.startActivity
 class MainActivity : BaseActivity() {
 
     private lateinit var ui: MainActivityUI
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = MainActivityViewModel(TaskRepository())
+        viewModel = MainViewModel(TaskRepository())
         ui = MainActivityUI(viewModel.tasks)
         ui.setContentView(this)
-        viewModel.getTasks()
     }
 
     override fun onBindViewModel() {
@@ -32,7 +31,10 @@ class MainActivity : BaseActivity() {
                 //Update task list
                 viewModel.updateListTask
                         .observeOnUiThread()
-                        .subscribe(this::handleUpdateListTask))
+                        .subscribe(this::handleUpdateListTask),
+                viewModel.getTasks()
+                        .observeOnUiThread()
+                        .subscribe())
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) = if (isShow) {
@@ -51,7 +53,9 @@ class MainActivity : BaseActivity() {
     }
 
     internal fun handleSwipeRefreshLayoutOnRefresh() {
-        viewModel.getTasks()
+        addDisposables(viewModel.getTasks()
+                .observeOnUiThread()
+                .subscribe())
     }
 
     internal fun eventTaskItemClicked() {

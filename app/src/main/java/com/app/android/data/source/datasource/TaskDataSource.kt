@@ -13,4 +13,9 @@ interface TaskDataSource {
      * This method use to get list task
      */
     fun getListTask(): Observable<List<Task>>
+
+    /**
+     * This method use to create new task
+     */
+    fun createTask(task: Task): Observable<Task>
 }
