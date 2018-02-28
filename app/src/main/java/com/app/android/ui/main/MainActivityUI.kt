@@ -31,8 +31,8 @@ class MainActivityUI(tasks: MutableList<Task>) : AnkoComponent<MainActivity> {
             backgroundColor = Color.WHITE
 
             toolbar {
-                id = R.id.main_activity_tool_bar
-                titleResource = R.string.main_activity_title
+                id = R.id.mainActivityToolbar
+                titleResource = R.string.mainActivityTitle
                 inflateMenu(R.menu.main_menu)
 
                 onMenuItemClick { item ->
@@ -55,7 +55,7 @@ class MainActivityUI(tasks: MutableList<Task>) : AnkoComponent<MainActivity> {
                     adapter = taskListAdapter
                 }
             }.lparams(matchParent, matchParent) {
-                below(R.id.main_activity_tool_bar)
+                below(R.id.mainActivityToolbar)
             }
 
             progressBar = progressBar {

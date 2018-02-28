@@ -33,9 +33,9 @@ class TaskListAdapter(val tasks: MutableList<Task>)
      */
     inner class TaskItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val tvTitle = itemView.find<TextView>(R.id.item_task_title)
-        private val tvDescription = itemView.find<TextView>(R.id.item_task_description)
-        private val tvStatus = itemView.find<TextView>(R.id.item_task_status)
+        private val tvTitle = itemView.find<TextView>(R.id.itemTaskTitle)
+        private val tvDescription = itemView.find<TextView>(R.id.itemTaskDescription)
+        private val tvStatus = itemView.find<TextView>(R.id.itemTaskStatus)
 
         init {
             itemView.onClick {
@@ -52,10 +52,10 @@ class TaskListAdapter(val tasks: MutableList<Task>)
                 tvDescription.text = description
                 tvStatus.run {
                     if (isDone == 1) {
-                        textResource = R.string.task_done
+                        textResource = R.string.taskDone
                         textColor = Color.GREEN
                     } else {
-                        textResource = R.string.task_doing
+                        textResource = R.string.taskDoing
                         textColor = Color.RED
                     }
                 }
@@ -69,25 +69,25 @@ class TaskListAdapter(val tasks: MutableList<Task>)
             val view = with(ui) {
                 verticalLayout {
                     lparams(wrapContent, wrapContent)
-                    padding = dimen(R.dimen.item_task_padding)
+                    padding = dimen(R.dimen.itemTaskPadding)
 
                     textView {
-                        id = R.id.item_task_title
+                        id = R.id.itemTaskTitle
                         maxLines = 1
                         textColor = Color.BLACK
-                        textSize = px2dip(dimen(R.dimen.item_task_tv_title_text_size))
+                        textSize = px2dip(dimen(R.dimen.itemTaskTvTitleTextSize))
                     }
 
                     textView {
-                        id = R.id.item_task_description
+                        id = R.id.itemTaskDescription
                         maxLines = 1
                         textColor = Color.GRAY
-                        textSize = px2dip(dimen(R.dimen.item_task_tv_description_text_size))
+                        textSize = px2dip(dimen(R.dimen.itemTaskTvDescriptionTextSize))
                     }
 
                     textView {
-                        id = R.id.item_task_status
-                        textSize = px2dip(dimen(R.dimen.item_task_tv_status_text_size))
+                        id = R.id.itemTaskStatus
+                        textSize = px2dip(dimen(R.dimen.itemTaskTvStatusTextSize))
                     }
                 }
             }
