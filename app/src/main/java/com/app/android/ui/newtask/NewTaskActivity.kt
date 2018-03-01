@@ -5,9 +5,12 @@ import android.view.View
 import com.app.android.R
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
+import com.app.android.extension.convert
 import com.app.android.extension.observeOnUiThread
-import com.uniqlo.circle.ui.base.BaseActivity
+import com.app.android.ui.base.BaseActivity
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.toast
+import java.util.*
 
 /**
  * Copyright © 2018 AsianTech inc.
@@ -16,11 +19,11 @@ import org.jetbrains.anko.setContentView
 class NewTaskActivity : BaseActivity() {
 
     private var ui = NewTaskActivityUI()
-    private lateinit var viewModel: NewTaskViewModel
+    private lateinit var viewModel: TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = NewTaskViewModel(TaskRepository())
+        viewModel = TaskViewModel(TaskRepository())
         ui.setContentView(this)
     }
 
@@ -41,7 +44,7 @@ class NewTaskActivity : BaseActivity() {
     internal fun eventOnViewClicked(view: View) {
         if (view.id == R.id.newTaskActivityBtnSubmit) {
             val task = Task(0, ui.edtTitle.text.toString().trim(), ui.edtDescription.text.toString().trim(),
-                    0, System.currentTimeMillis().toString(), System.currentTimeMillis().toString())
+                    0, Date().convert(System.currentTimeMillis()), Date().convert(System.currentTimeMillis()))
             addDisposables(viewModel.createTask(task)
                     .observeOnUiThread()
                     .subscribe(this::handleCreateTaskSuccess, this::handleCreateTaskError))
@@ -59,10 +62,10 @@ class NewTaskActivity : BaseActivity() {
     }
 
     private fun handleCreateTaskSuccess(task: Task) {
-
+        finish()
     }
 
     private fun handleCreateTaskError(t: Throwable) {
-
+        toast("create task error")
     }
 }

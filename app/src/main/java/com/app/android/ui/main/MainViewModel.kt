@@ -3,7 +3,7 @@ package com.app.android.ui.main
 import android.support.v7.util.DiffUtil
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
-import com.uniqlo.circle.ui.base.Diff
+import com.app.android.ui.base.Diff
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.subjects.BehaviorSubject

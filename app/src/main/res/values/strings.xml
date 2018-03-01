@@ -14,4 +14,8 @@
     <string name="newTaskHintTitle">Title</string>
     <string name="newTaskHintDescription">Description</string>
     <string name="newTaskBtnSubmit">Submit</string>
+
+    <!--Task Detail Screen-->
+    <string name="taskDetailBtnUpdate">Update</string>
+    <string name="taskDetailBtnDelete">Delete</string>
 </resources>

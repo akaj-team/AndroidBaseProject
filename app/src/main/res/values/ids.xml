@@ -15,4 +15,13 @@
     <item name="newTaskActivityEdtTitle" type="id" />
     <item name="newTaskActivityEdtDescription" type="id" />
     <item name="newTaskActivityBtnSubmit" type="id" />
+
+    <!--View ids for TaskDetailActivity-->
+    <item name="taskDetailActivityEdtTitle" type="id" />
+    <item name="taskDetailActivityEdtDescription" type="id" />
+    <item name="taskDetailActivityBtnUpdate" type="id" />
+    <item name="taskDetailActivityBtnDelete" type="id" />
+    <item name="taskDetailActivityRdGroup" type="id" />
+    <item name="taskDetailActivityRdDone" type="id" />
+    <item name="taskDetailActivityRdDoing" type="id" />
 </resources>

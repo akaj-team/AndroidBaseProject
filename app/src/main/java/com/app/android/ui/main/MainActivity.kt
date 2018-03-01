@@ -3,10 +3,12 @@ package com.app.android.ui.main
 import android.os.Bundle
 import android.support.v7.util.DiffUtil
 import android.view.View
+import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
 import com.app.android.extension.observeOnUiThread
+import com.app.android.ui.base.BaseActivity
+import com.app.android.ui.edittask.TaskDetailActivity
 import com.app.android.ui.newtask.NewTaskActivity
-import com.uniqlo.circle.ui.base.BaseActivity
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 
@@ -58,7 +60,8 @@ class MainActivity : BaseActivity() {
                 .subscribe())
     }
 
-    internal fun eventTaskItemClicked() {
+    internal fun eventTaskItemClicked(task: Task) {
+        startActivity<TaskDetailActivity>(TaskDetailActivity.KEY_TASK_ID to task.id)
     }
 
     internal fun eventAddNewTaskClicked() {

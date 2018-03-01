@@ -50,7 +50,7 @@ class MainActivityUI(tasks: MutableList<Task>) : AnkoComponent<MainActivity> {
                     lparams(matchParent, matchParent)
                     layoutManager = LinearLayoutManager(ctx)
                     taskListAdapter.onItemClick = {
-                        owner.eventTaskItemClicked()
+                        owner.eventTaskItemClicked(it)
                     }
                     adapter = taskListAdapter
                 }
