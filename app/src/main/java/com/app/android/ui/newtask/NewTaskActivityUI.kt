@@ -67,6 +67,7 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
             btnSubmit = button {
                 id = R.id.newTaskActivityBtnSubmit
                 textResource = R.string.newTaskBtnSubmit
+                isEnabled = false
 
                 onClick {
                     owner.eventOnViewClicked(it!!)

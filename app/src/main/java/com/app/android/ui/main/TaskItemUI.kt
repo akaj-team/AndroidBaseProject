@@ -2,7 +2,9 @@ package com.app.android.ui.main
 
 import android.graphics.Color
 import android.view.ViewGroup
+import android.widget.TextView
 import com.app.android.R
+import com.app.android.data.model.Task
 import org.jetbrains.anko.*
 
 /**
@@ -11,30 +13,49 @@ import org.jetbrains.anko.*
  */
 class TaskItemUI : AnkoComponent<ViewGroup> {
 
+    private lateinit var tvTitle: TextView
+    private lateinit var tvDescription: TextView
+    private lateinit var tvStatus: TextView
+
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
-        val verticalLayout = verticalLayout {
+        verticalLayout {
             lparams(wrapContent, wrapContent)
             padding = dimen(R.dimen.itemTaskPadding)
 
-            textView {
+            tvTitle = textView {
                 id = R.id.itemTaskTitle
                 maxLines = 1
                 textColor = Color.BLACK
                 textSize = px2dip(dimen(R.dimen.itemTaskTvTitleTextSize))
             }
 
-            textView {
+            tvDescription = textView {
                 id = R.id.itemTaskDescription
                 maxLines = 1
                 textColor = Color.GRAY
                 textSize = px2dip(dimen(R.dimen.itemTaskTvDescriptionTextSize))
             }
 
-            textView {
+            tvStatus = textView {
                 id = R.id.itemTaskStatus
                 textSize = px2dip(dimen(R.dimen.itemTaskTvStatusTextSize))
             }
         }
-        verticalLayout
+    }
+
+    internal fun updateTaskItem(task: Task) {
+        with(task) {
+            tvTitle.text = title
+            tvDescription.text = description
+            tvStatus.run {
+                if (isDone == 1) {
+                    textResource = R.string.taskDone
+                    textColor = Color.GREEN
+                } else {
+                    textResource = R.string.taskDoing
+                    textColor = Color.RED
+                }
+            }
+        }
     }
 }
