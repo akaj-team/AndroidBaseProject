@@ -38,6 +38,8 @@ class MainViewModel(private val taskRepository: TaskRepository) {
                                 oldItem.title == newItem.title
                                 oldItem.description == newItem.description
                                 oldItem.isDone == newItem.isDone
+                                oldItem.createTime == newItem.createTime
+                                oldItem.updateTime == newItem.updateTime
                             }
                             .calculateDiff()
 
