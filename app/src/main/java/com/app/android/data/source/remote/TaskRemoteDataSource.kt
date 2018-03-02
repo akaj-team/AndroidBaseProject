@@ -20,5 +20,5 @@ class TaskRemoteDataSource(private val apiService: ApiService = ApiClient.getIns
 
     override fun editTask(id: Int, task: Task): Observable<Task> = apiService.editTask(id, task)
 
-    override fun deleteTask(id: Int): Observable<Task> = apiService.deleteTask(id)
+    override fun deleteTask(id: Int): Observable<Unit> = apiService.deleteTask(id)
 }

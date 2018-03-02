@@ -41,5 +41,5 @@ interface TaskDataSource {
      *
      * @param id id of task
      */
-    fun deleteTask(id: Int): Observable<Task>
+    fun deleteTask(id: Int): Observable<Unit>
 }

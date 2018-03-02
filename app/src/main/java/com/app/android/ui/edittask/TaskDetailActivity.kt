@@ -120,7 +120,7 @@ class TaskDetailActivity : BaseActivity() {
         toast("update task error")
     }
 
-    private fun handleDeleteTaskSuccess(task: Task) {
+    private fun handleDeleteTaskSuccess(unit: Unit) {
         toast("delete task success")
         finish()
     }

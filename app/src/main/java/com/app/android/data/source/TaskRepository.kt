@@ -21,5 +21,5 @@ class TaskRepository : TaskDataSource {
 
     override fun editTask(id: Int, task: Task): Observable<Task> = taskRemoteDataSource.editTask(id, task)
 
-    override fun deleteTask(id: Int): Observable<Task> = taskRemoteDataSource.deleteTask(id)
+    override fun deleteTask(id: Int): Observable<Unit> = taskRemoteDataSource.deleteTask(id)
 }

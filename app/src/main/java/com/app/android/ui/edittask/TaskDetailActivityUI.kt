@@ -32,12 +32,16 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
         relativeLayout {
             lparams(matchParent, matchParent)
             backgroundColor = Color.WHITE
+            isFocusable = true
+            isFocusableInTouchMode = true
             padding = dimen(R.dimen.taskDetailRlPadding)
 
             textView(R.string.taskDetailTitle) {
                 id = R.id.taskDetailActivityTvTitle
+                textSize = px2dip(dimen(R.dimen.taskDetailTvTitleTextSize))
+                textColor = Color.BLACK
             }.lparams {
-                centerInParent()
+                centerHorizontally()
                 topMargin = dimen(R.dimen.taskDetailTitleMarginTop)
             }
 

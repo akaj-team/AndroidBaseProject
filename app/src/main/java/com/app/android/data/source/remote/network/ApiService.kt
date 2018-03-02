@@ -47,5 +47,5 @@ interface ApiService {
      * @param id id of task
      */
     @DELETE("api/tasks/{id}")
-    fun deleteTask(@Path("id") id: Int): Observable<Task>
+    fun deleteTask(@Path("id") id: Int): Observable<Unit>
 }

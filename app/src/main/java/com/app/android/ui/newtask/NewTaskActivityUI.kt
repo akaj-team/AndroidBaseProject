@@ -29,13 +29,17 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
         relativeLayout {
             lparams(matchParent, matchParent)
             backgroundColor = Color.WHITE
+            isFocusable = true
+            isFocusableInTouchMode = true
             padding = dimen(R.dimen.newTaskRlPadding)
 
             textView(R.string.newTaskTile) {
                 id = R.id.newTaskActivityTvTitle
+                textSize = px2dip(dimen(R.dimen.newTaskTvTitleTextSize))
+                textColor = Color.BLACK
             }.lparams {
-                centerInParent()
-                topMargin = dimen(R.dimen.newTaskTvTitleMarginTop)
+                centerHorizontally()
+                topMargin = dimen(R.dimen.newTaskTitleMarginTop)
             }
 
             edtTitle = editText {
