@@ -1,7 +1,5 @@
 package com.app.android.ui.edittask
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.app.android.R
@@ -27,12 +25,6 @@ class TaskDetailActivity : BaseActivity() {
 
     companion object {
         const val KEY_TASK_ID = "task_id"
-
-        fun newInstance(context: Context, id: Int): Intent {
-            val intent = Intent(context, TaskDetailActivity::class.java)
-            intent.putExtra(KEY_TASK_ID, id)
-            return intent
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

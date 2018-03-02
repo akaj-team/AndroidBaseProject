@@ -68,15 +68,18 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
             }
 
             rgStatus = radioGroup {
+                orientation = RadioGroup.HORIZONTAL
                 lparams(matchParent, wrapContent)
                 id = R.id.taskDetailActivityRdGroup
 
                 radioButton {
                     id = R.id.taskDetailActivityRdDone
+                    textResource = R.string.taskDone
                 }
 
                 radioButton {
                     id = R.id.taskDetailActivityRdDoing
+                    textResource = R.string.taskDoing
                 }
 
             }.lparams {
@@ -84,7 +87,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 below(R.id.taskDetailActivityEdtDescription)
             }
 
-            verticalLayout {
+            linearLayout {
                 lparams(matchParent, wrapContent)
                 btnUpdate = button {
                     id = R.id.taskDetailActivityBtnUpdate
@@ -103,7 +106,6 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 btnDelete = button {
                     id = R.id.taskDetailActivityBtnDelete
                     textResource = R.string.taskDetailBtnDelete
-                    isEnabled = false
 
                     onClick {
                         owner.eventOnViewClicked(it!!)
@@ -115,6 +117,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 }
             }.lparams {
                 below(R.id.taskDetailActivityRdGroup)
+                centerInParent()
             }
 
 

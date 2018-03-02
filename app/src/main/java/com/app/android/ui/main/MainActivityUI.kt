@@ -32,6 +32,7 @@ class MainActivityUI(tasks: MutableList<Task>) : AnkoComponent<MainActivity> {
 
             toolbar {
                 id = R.id.mainActivityToolbar
+                backgroundColor = Color.BLUE
                 titleResource = R.string.mainActivityTitle
                 inflateMenu(R.menu.main_menu)
 

@@ -9,6 +9,6 @@ import java.util.*
  */
 fun Date.convert(timestamp: Long): String {
     this.time = timestamp
-    val format = SimpleDateFormat("yyyy-MM-dd", Locale.JAPANESE)
+    val format = SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.JAPANESE)
     return format.format(this)
 }

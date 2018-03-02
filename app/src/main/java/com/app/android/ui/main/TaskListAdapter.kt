@@ -18,9 +18,10 @@ class TaskListAdapter(val tasks: MutableList<Task>)
 
     override fun getItemCount() = tasks.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            = TaskItemViewHolder(TaskItemUI(), TaskItemUI().createView(AnkoContext.create(parent.context, parent, false)))
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder {
+        val ui = TaskItemUI()
+        return TaskItemViewHolder(ui, ui.createView(AnkoContext.create(parent.context, parent, false)))
+    }
 
     override fun onBindViewHolder(holder: TaskItemViewHolder?, position: Int) {
         holder?.onBind(position)
