@@ -37,6 +37,7 @@ class MainViewModel(private val taskRepository: TaskRepository) {
                             .areContentsTheSame { oldItem, newItem ->
                                 oldItem.title == newItem.title
                                 oldItem.description == newItem.description
+                                oldItem.isDone == newItem.isDone
                             }
                             .calculateDiff()
 

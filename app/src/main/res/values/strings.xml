@@ -11,11 +11,15 @@
     <string name="taskDoing">Doing</string>
 
     <!--New Task Screen-->
+    <string name="newTaskTile">Add New Task</string>
     <string name="newTaskHintTitle">Title</string>
     <string name="newTaskHintDescription">Description</string>
     <string name="newTaskBtnSubmit">Submit</string>
 
     <!--Task Detail Screen-->
+    <string name="taskDetailTitle">Task detail</string>
+    <string name="taskDetailHintTitle">Title</string>
+    <string name="taskDetailHintDescription">Description</string>
     <string name="taskDetailBtnUpdate">Update</string>
     <string name="taskDetailBtnDelete">Delete</string>
 </resources>

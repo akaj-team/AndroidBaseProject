@@ -31,6 +31,13 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
             backgroundColor = Color.WHITE
             padding = dimen(R.dimen.newTaskRlPadding)
 
+            textView(R.string.newTaskTile) {
+                id = R.id.newTaskActivityTvTitle
+            }.lparams {
+                centerInParent()
+                topMargin = dimen(R.dimen.newTaskTvTitleMarginTop)
+            }
+
             edtTitle = editText {
                 id = R.id.newTaskActivityEdtTitle
                 hintResource = R.string.newTaskHintTitle

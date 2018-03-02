@@ -12,11 +12,13 @@
     <item name="mainActivityToolbar" type="id" />
 
     <!--View ids for NewTaskActivity-->
+    <item name="newTaskActivityTvTitle" type="id" />
     <item name="newTaskActivityEdtTitle" type="id" />
     <item name="newTaskActivityEdtDescription" type="id" />
     <item name="newTaskActivityBtnSubmit" type="id" />
 
     <!--View ids for TaskDetailActivity-->
+    <item name="taskDetailActivityTvTitle" type="id" />
     <item name="taskDetailActivityEdtTitle" type="id" />
     <item name="taskDetailActivityEdtDescription" type="id" />
     <item name="taskDetailActivityBtnUpdate" type="id" />

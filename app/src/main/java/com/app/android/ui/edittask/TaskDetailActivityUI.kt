@@ -32,13 +32,20 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
         relativeLayout {
             lparams(matchParent, matchParent)
             backgroundColor = Color.WHITE
-            padding = dimen(R.dimen.newTaskRlPadding)
+            padding = dimen(R.dimen.taskDetailRlPadding)
+
+            textView(R.string.taskDetailTitle) {
+                id = R.id.taskDetailActivityTvTitle
+            }.lparams {
+                centerInParent()
+                topMargin = dimen(R.dimen.taskDetailTitleMarginTop)
+            }
 
             edtTitle = editText {
                 id = R.id.taskDetailActivityEdtTitle
-                hintResource = R.string.newTaskHintTitle
+                hintResource = R.string.taskDetailHintTitle
                 inputType = InputType.TYPE_CLASS_TEXT
-                textSize = px2dip(dimen(R.dimen.newTaskTvTitleTextSize))
+                textSize = px2dip(dimen(R.dimen.taskDetailTvTitleTextSize))
                 maxLines = 1
 
                 onEditorAction { _, actionId, _ ->
@@ -47,14 +54,14 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                     }
                 }
             }.lparams(matchParent, wrapContent) {
-                topMargin = dimen(R.dimen.newTaskTvTitleMarginTop)
+                topMargin = dimen(R.dimen.taskDetailTvTitleMarginTop)
             }
 
             edtDescription = editText {
                 id = R.id.taskDetailActivityEdtDescription
-                hintResource = R.string.newTaskHintDescription
+                hintResource = R.string.taskDetailHintDescription
                 inputType = InputType.TYPE_CLASS_TEXT
-                textSize = px2dip(dimen(R.dimen.newTaskTvDescriptionTextSize))
+                textSize = px2dip(dimen(R.dimen.taskDetailTvDescriptionTextSize))
                 maxLines = 1
 
                 onEditorAction { _, actionId, _ ->
@@ -64,7 +71,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 }
             }.lparams(matchParent, wrapContent) {
                 below(R.id.taskDetailActivityEdtTitle)
-                topMargin = dimen(R.dimen.newTaskTvDescriptionMarginTop)
+                topMargin = dimen(R.dimen.taskDetailTvDescriptionMarginTop)
             }
 
             rgStatus = radioGroup {
@@ -99,7 +106,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                         hideKeyboard(ctx)
                     }
                 }.lparams {
-                    topMargin = dimen(R.dimen.newTaskBtnSubmitMarginTop)
+                    topMargin = dimen(R.dimen.taskDetailBtnUpdateMarginTop)
 
                 }
 
@@ -112,7 +119,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                         hideKeyboard(ctx)
                     }
                 }.lparams {
-                    topMargin = dimen(R.dimen.newTaskBtnSubmitMarginTop)
+                    topMargin = dimen(R.dimen.taskDetailBtnUpdateMarginTop)
 
                 }
             }.lparams {
