@@ -100,9 +100,8 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
 
             linearLayout {
                 lparams(matchParent, wrapContent)
-                btnUpdate = button {
+                btnUpdate = button(R.string.taskDetailBtnUpdate) {
                     id = R.id.taskDetailActivityBtnUpdate
-                    textResource = R.string.taskDetailBtnUpdate
                     isEnabled = false
 
                     onClick {
@@ -114,9 +113,8 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
 
                 }
 
-                btnDelete = button {
+                btnDelete = button(R.string.taskDetailBtnDelete) {
                     id = R.id.taskDetailActivityBtnDelete
-                    textResource = R.string.taskDetailBtnDelete
 
                     onClick {
                         owner.eventOnViewClicked(it!!)

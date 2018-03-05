@@ -75,9 +75,8 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
                 topMargin = dimen(R.dimen.newTaskTvDescriptionMarginTop)
             }
 
-            btnSubmit = button {
+            btnSubmit = button(R.string.newTaskBtnSubmit) {
                 id = R.id.newTaskActivityBtnSubmit
-                textResource = R.string.newTaskBtnSubmit
                 isEnabled = false
 
                 onClick {
