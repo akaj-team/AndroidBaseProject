@@ -1,6 +1,5 @@
 package com.uniqlo.circle.data.source.remote.network
 
-import android.util.Log
 import com.app.android.data.model.BusEvent
 import com.app.android.data.source.remote.network.ApiException
 import com.app.android.data.source.remote.network.RxBus
@@ -18,6 +17,8 @@ import java.net.HttpURLConnection
 interface CustomCallback<T> {
     /** Called for [200] responses.  */
     fun success(call: Call<T>, response: Response<T>)
+
+    fun success(call: Call<T>)
 
     /** Called for [401] responses.  */
     fun unauthenticated(t: Throwable)
@@ -96,7 +97,13 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                 val code = response.code()
                 try {
                     when (code) {
-                        HttpURLConnection.HTTP_OK -> callback.success(call, response)
+                        HttpURLConnection.HTTP_OK -> {
+                            if (response.body() != null) {
+                                callback.success(call, response)
+                            } else {
+                                callback.success(call)
+                            }
+                        }
                         HttpURLConnection.HTTP_UNAUTHORIZED -> RxBus.publish(BusEvent())
 
                         HttpURLConnection.HTTP_BAD_GATEWAY -> {
@@ -109,7 +116,6 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                         else -> callback.unexpectedError(Throwable("Error unknow"))
                     }
                 } catch (e: EOFException) {
-                    Log.d("xxx: ", "respone: " + response)
                     callback.unexpectedError(e)
                 }
             }

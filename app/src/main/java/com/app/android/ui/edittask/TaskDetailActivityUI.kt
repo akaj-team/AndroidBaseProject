@@ -38,7 +38,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
 
             textView(R.string.taskDetailTitle) {
                 id = R.id.taskDetailActivityTvTitle
-                textSize = px2dip(dimen(R.dimen.taskDetailTvTitleTextSize))
+                textSizeDimen = R.dimen.taskDetailTvTitleTextSize
                 textColor = Color.BLACK
             }.lparams {
                 centerHorizontally()
@@ -49,7 +49,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 id = R.id.taskDetailActivityEdtTitle
                 hintResource = R.string.taskDetailHintTitle
                 inputType = InputType.TYPE_CLASS_TEXT
-                textSize = px2dip(dimen(R.dimen.taskDetailTvTitleTextSize))
+                textSizeDimen = R.dimen.taskDetailTvTitleTextSize
                 maxLines = 1
             }.lparams(matchParent, wrapContent) {
                 topMargin = dimen(R.dimen.taskDetailTvTitleMarginTop)
@@ -59,7 +59,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 id = R.id.taskDetailActivityEdtDescription
                 hintResource = R.string.taskDetailHintDescription
                 inputType = InputType.TYPE_CLASS_TEXT
-                textSize = px2dip(dimen(R.dimen.taskDetailTvDescriptionTextSize))
+                textSizeDimen = R.dimen.taskDetailTvDescriptionTextSize
                 maxLines = 1
             }.lparams(matchParent, wrapContent) {
                 below(R.id.taskDetailActivityEdtTitle)

@@ -27,19 +27,19 @@ class TaskItemUI : AnkoComponent<ViewGroup> {
                 id = R.id.itemTaskTitle
                 maxLines = 1
                 textColor = Color.BLACK
-                textSize = px2dip(dimen(R.dimen.itemTaskTvTitleTextSize))
+                textSizeDimen = R.dimen.itemTaskTvTitleTextSize
             }
 
             tvDescription = textView {
                 id = R.id.itemTaskDescription
                 maxLines = 1
                 textColor = Color.GRAY
-                textSize = px2dip(dimen(R.dimen.itemTaskTvDescriptionTextSize))
+                textSizeDimen = R.dimen.itemTaskTvDescriptionTextSize
             }
 
             tvStatus = textView {
                 id = R.id.itemTaskStatus
-                textSize = px2dip(dimen(R.dimen.itemTaskTvStatusTextSize))
+                textSizeDimen = R.dimen.itemTaskTvStatusTextSize
             }
         }
     }

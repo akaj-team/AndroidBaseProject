@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class ApiClient private constructor(url: String? = null) {
 
     internal var token: String? = null
-    private var baseUrl: String = if (url == null || url.isEmpty()) "http://172.17.29.7:8080/" else url
+    private var baseUrl: String = if (url == null || url.isEmpty()) "http://172.17.29.7:8089/" else url
 
     companion object : SingletonHolder<ApiClient, String>(::ApiClient)
 

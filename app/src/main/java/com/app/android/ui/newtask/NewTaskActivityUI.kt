@@ -35,7 +35,7 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
 
             textView(R.string.newTaskTile) {
                 id = R.id.newTaskActivityTvTitle
-                textSize = px2dip(dimen(R.dimen.newTaskTvTitleTextSize))
+                textSizeDimen = R.dimen.newTaskTvTitleTextSize
                 textColor = Color.BLACK
             }.lparams {
                 centerHorizontally()
@@ -46,14 +46,8 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
                 id = R.id.newTaskActivityEdtTitle
                 hintResource = R.string.newTaskHintTitle
                 inputType = InputType.TYPE_CLASS_TEXT
-                textSize = px2dip(dimen(R.dimen.newTaskTvTitleTextSize))
+                textSizeDimen = R.dimen.newTaskTvTitleTextSize
                 maxLines = 1
-
-                onEditorAction { _, actionId, _ ->
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        hideKeyboard(ctx)
-                    }
-                }
             }.lparams(matchParent, wrapContent) {
                 topMargin = dimen(R.dimen.newTaskTvTitleMarginTop)
             }
@@ -62,14 +56,8 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
                 id = R.id.newTaskActivityEdtDescription
                 hintResource = R.string.newTaskHintDescription
                 inputType = InputType.TYPE_CLASS_TEXT
-                textSize = px2dip(dimen(R.dimen.newTaskTvDescriptionTextSize))
+                textSizeDimen = R.dimen.newTaskTvDescriptionTextSize
                 maxLines = 1
-
-                onEditorAction { _, actionId, _ ->
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        hideKeyboard(ctx)
-                    }
-                }
             }.lparams(matchParent, wrapContent) {
                 below(R.id.newTaskActivityEdtTitle)
                 topMargin = dimen(R.dimen.newTaskTvDescriptionMarginTop)
@@ -98,9 +86,18 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
         }.applyRecursively { view: View ->
             if (view is EditText) {
                 when (view) {
-                    edtTitle, edtDescription -> view.onTextChangeListener {
-                        owner.onHandleTextChange(edtTitle.text.toString().trim(),
-                                edtDescription.text.toString().trim())
+                    edtTitle, edtDescription -> {
+                        view.run {
+                            onTextChangeListener {
+                                owner.onHandleTextChange(edtTitle.text.toString().trim(),
+                                        edtDescription.text.toString().trim())
+                            }
+                            onEditorAction { _, actionId, _ ->
+                                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                                    hideKeyboard(ctx)
+                                }
+                            }
+                        }
                     }
                 }
             }
