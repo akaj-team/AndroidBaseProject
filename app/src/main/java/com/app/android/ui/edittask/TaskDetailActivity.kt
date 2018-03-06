@@ -78,6 +78,7 @@ class TaskDetailActivity : BaseActivity() {
     internal fun eventOnDeleteClicked(view: View) {
         if (view.id == R.id.taskDetailActivityBtnDelete) {
             addDisposables(viewModel.deleteTask(id)
+                    .observeOnUiThread()
                     .subscribe(this::handleDeleteTaskSuccess, this::handleDeleteTaskError))
         }
     }
@@ -123,7 +124,7 @@ class TaskDetailActivity : BaseActivity() {
         toast("update task error ${t.message}")
     }
 
-    private fun handleDeleteTaskSuccess() {
+    private fun handleDeleteTaskSuccess(unit: Unit) {
         toast("delete task success")
         finish()
     }

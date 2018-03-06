@@ -3,8 +3,8 @@ package com.app.android.data.source
 import com.app.android.data.model.Task
 import com.app.android.data.source.datasource.TaskDataSource
 import com.app.android.data.source.remote.TaskRemoteDataSource
-import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  *
@@ -16,11 +16,11 @@ class TaskRepository : TaskDataSource {
 
     override fun getListTask(): Observable<List<Task>> = taskRemoteDataSource.getListTask()
 
-    override fun createTask(task: Task): Observable<Task> = taskRemoteDataSource.createTask(task)
+    override fun createTask(task: Task): Single<Task> = taskRemoteDataSource.createTask(task)
 
-    override fun getTaskDetail(id: Int): Observable<Task> = taskRemoteDataSource.getTaskDetail(id)
+    override fun getTaskDetail(id: Int): Single<Task> = taskRemoteDataSource.getTaskDetail(id)
 
-    override fun editTask(id: Int, task: Task): Observable<Task> = taskRemoteDataSource.editTask(id, task)
+    override fun editTask(id: Int, task: Task): Single<Task> = taskRemoteDataSource.editTask(id, task)
 
-    override fun deleteTask(id: Int): Completable = taskRemoteDataSource.deleteTask(id)
+    override fun deleteTask(id: Int): Single<Unit> = taskRemoteDataSource.deleteTask(id)
 }

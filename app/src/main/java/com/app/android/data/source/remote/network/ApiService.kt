@@ -1,8 +1,8 @@
 package com.app.android.data.source.remote.network
 
 import com.app.android.data.model.Task
-import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.*
 
 /**
@@ -23,7 +23,7 @@ interface ApiService {
      * @param task task
      */
     @POST("api/tasks")
-    fun createTask(@Body task: Task): Observable<Task>
+    fun createTask(@Body task: Task): Single<Task>
 
 
     /**
@@ -32,7 +32,7 @@ interface ApiService {
      * @param id id of task
      */
     @GET("api/tasks/{id}")
-    fun getTaskDetail(@Path("id") id: Int): Observable<Task>
+    fun getTaskDetail(@Path("id") id: Int): Single<Task>
 
     /**
      * This method use to edit task
@@ -40,7 +40,7 @@ interface ApiService {
      * @param id id of task
      */
     @PUT("api/tasks/{id}")
-    fun editTask(@Path("id") id: Int, @Body task: Task): Observable<Task>
+    fun editTask(@Path("id") id: Int, @Body task: Task): Single<Task>
 
     /**
      * This method use to delete task
@@ -48,5 +48,5 @@ interface ApiService {
      * @param id id of task
      */
     @DELETE("api/tasks/{id}")
-    fun deleteTask(@Path("id") id: Int): Completable
+    fun deleteTask(@Path("id") id: Int): Single<Unit>
 }

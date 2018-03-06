@@ -138,7 +138,6 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                                 }
                             }
                         }
-
                     }
                 }
             }
