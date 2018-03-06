@@ -20,7 +20,7 @@ class TaskItemUI : AnkoComponent<ViewGroup> {
 
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
         verticalLayout {
-            lparams(wrapContent, wrapContent)
+            lparams(matchParent, wrapContent)
             padding = dimen(R.dimen.itemTaskPadding)
 
             tvTitle = textView {

@@ -18,8 +18,6 @@ interface CustomCallback<T> {
     /** Called for [200] responses.  */
     fun success(call: Call<T>, response: Response<T>)
 
-    fun success(call: Call<T>)
-
     /** Called for [401] responses.  */
     fun unauthenticated(t: Throwable)
 
@@ -97,13 +95,7 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                 val code = response.code()
                 try {
                     when (code) {
-                        HttpURLConnection.HTTP_OK -> {
-                            if (response.body() != null) {
-                                callback.success(call, response)
-                            } else {
-                                callback.success(call)
-                            }
-                        }
+                        HttpURLConnection.HTTP_OK -> callback.success(call, response)
                         HttpURLConnection.HTTP_UNAUTHORIZED -> RxBus.publish(BusEvent())
 
                         HttpURLConnection.HTTP_BAD_GATEWAY -> {
