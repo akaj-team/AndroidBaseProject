@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.app.android.R
 import com.app.android.data.model.Task
+import com.app.android.ui.edittask.TaskDetailActivity.Companion.DONE
 import org.jetbrains.anko.*
 
 /**
@@ -48,7 +49,7 @@ class TaskItemUI : AnkoComponent<ViewGroup> {
             tvTitle.text = title
             tvDescription.text = description
             tvStatus.run {
-                if (isDone == 1) {
+                if (isDone == DONE) {
                     textResource = R.string.taskDone
                     textColor = Color.GREEN
                 } else {

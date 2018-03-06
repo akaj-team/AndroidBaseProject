@@ -11,7 +11,7 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
  * Copyright © 2018 AsianTech inc.
  * Created by trung.nguyen on 2/22/18.
  */
-class TaskListAdapter(val tasks: MutableList<Task>)
+class TaskListAdapter(private val tasks: MutableList<Task>)
     : RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>() {
 
     var onItemClick: (task: Task) -> Unit = {}

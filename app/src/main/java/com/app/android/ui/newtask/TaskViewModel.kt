@@ -43,7 +43,5 @@ class TaskViewModel(private val taskRepository: TaskRepository) {
                 progressBarStatus.onNext(false)
             }
 
-    internal fun isEnableSubmitButton(title: String, description: String) = !title.isBlank() && !description.isBlank()
-
-    internal fun isEnableUpdateButton(title: String, description: String) = !title.isBlank() && !description.isBlank()
+    internal fun isEnableButton(title: String, description: String) = !title.isBlank() && !description.isBlank()
 }

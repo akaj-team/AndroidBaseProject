@@ -51,12 +51,6 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 inputType = InputType.TYPE_CLASS_TEXT
                 textSize = px2dip(dimen(R.dimen.taskDetailTvTitleTextSize))
                 maxLines = 1
-
-                onEditorAction { _, actionId, _ ->
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        hideKeyboard(ctx)
-                    }
-                }
             }.lparams(matchParent, wrapContent) {
                 topMargin = dimen(R.dimen.taskDetailTvTitleMarginTop)
             }
@@ -67,20 +61,14 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                 inputType = InputType.TYPE_CLASS_TEXT
                 textSize = px2dip(dimen(R.dimen.taskDetailTvDescriptionTextSize))
                 maxLines = 1
-
-                onEditorAction { _, actionId, _ ->
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        hideKeyboard(ctx)
-                    }
-                }
             }.lparams(matchParent, wrapContent) {
                 below(R.id.taskDetailActivityEdtTitle)
                 topMargin = dimen(R.dimen.taskDetailTvDescriptionMarginTop)
             }
 
             rgStatus = radioGroup {
-                orientation = RadioGroup.HORIZONTAL
                 lparams(matchParent, wrapContent)
+                orientation = RadioGroup.HORIZONTAL
                 id = R.id.taskDetailActivityRdGroup
 
                 radioButton {
@@ -105,7 +93,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                     isEnabled = false
 
                     onClick {
-                        owner.eventOnViewClicked(it!!)
+                        owner.eventOnUpdateClicked(it!!)
                         hideKeyboard(ctx)
                     }
                 }.lparams {
@@ -117,7 +105,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                     id = R.id.taskDetailActivityBtnDelete
 
                     onClick {
-                        owner.eventOnViewClicked(it!!)
+                        owner.eventOnDeleteClicked(it!!)
                         hideKeyboard(ctx)
                     }
                 }.lparams {
@@ -138,9 +126,19 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
         }.applyRecursively { view: View ->
             if (view is EditText) {
                 when (view) {
-                    edtTitle, edtDescription -> view.onTextChangeListener {
-                        owner.onHandleTextChange(edtTitle.text.toString().trim(),
-                                edtDescription.text.toString().trim())
+                    edtTitle, edtDescription -> {
+                        view.run {
+                            onTextChangeListener {
+                                owner.onHandleTextChange(edtTitle.text.toString().trim(),
+                                        edtDescription.text.toString().trim())
+                            }
+                            onEditorAction { _, actionId, _ ->
+                                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                                    hideKeyboard(ctx)
+                                }
+                            }
+                        }
+
                     }
                 }
             }

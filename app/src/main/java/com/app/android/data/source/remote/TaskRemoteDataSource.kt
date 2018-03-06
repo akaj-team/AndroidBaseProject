@@ -4,6 +4,7 @@ import com.app.android.data.model.Task
 import com.app.android.data.source.datasource.TaskDataSource
 import com.app.android.data.source.remote.network.ApiClient
 import com.app.android.data.source.remote.network.ApiService
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 /**
@@ -20,5 +21,5 @@ class TaskRemoteDataSource(private val apiService: ApiService = ApiClient.getIns
 
     override fun editTask(id: Int, task: Task): Observable<Task> = apiService.editTask(id, task)
 
-    override fun deleteTask(id: Int): Observable<Unit> = apiService.deleteTask(id)
+    override fun deleteTask(id: Int): Completable = apiService.deleteTask(id)
 }

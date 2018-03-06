@@ -1,6 +1,7 @@
 package com.app.android.data.source.remote.network
 
 import com.app.android.data.model.Task
+import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -47,5 +48,5 @@ interface ApiService {
      * @param id id of task
      */
     @DELETE("api/tasks/{id}")
-    fun deleteTask(@Path("id") id: Int): Observable<Unit>
+    fun deleteTask(@Path("id") id: Int): Completable
 }

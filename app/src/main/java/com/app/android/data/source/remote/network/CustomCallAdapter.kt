@@ -1,5 +1,6 @@
 package com.uniqlo.circle.data.source.remote.network
 
+import android.util.Log
 import com.app.android.data.model.BusEvent
 import com.app.android.data.source.remote.network.ApiException
 import com.app.android.data.source.remote.network.RxBus
@@ -108,6 +109,7 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                         else -> callback.unexpectedError(Throwable("Error unknow"))
                     }
                 } catch (e: EOFException) {
+                    Log.d("xxx: ", "respone: " + response)
                     callback.unexpectedError(e)
                 }
             }

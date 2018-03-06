@@ -5,7 +5,7 @@ import android.view.View
 import com.app.android.R
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
-import com.app.android.extension.convert
+import com.app.android.extension.getTimestamp
 import com.app.android.extension.observeOnUiThread
 import com.app.android.ui.base.BaseActivity
 import com.app.android.ui.newtask.TaskViewModel
@@ -19,13 +19,16 @@ import java.util.*
  */
 class TaskDetailActivity : BaseActivity() {
 
-    private val id by lazy { intent.getIntExtra(KEY_TASK_ID, 0) }
-    private var ui = TaskDetailActivityUI()
-    private lateinit var viewModel: TaskViewModel
-
     companion object {
         const val KEY_TASK_ID = "task_id"
+        const val DOING = 0
+        const val DONE = 1
     }
+
+    private val id by lazy { intent.getIntExtra(KEY_TASK_ID, 0) }
+    private lateinit var task: Task
+    private var ui = TaskDetailActivityUI()
+    private lateinit var viewModel: TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,67 +49,67 @@ class TaskDetailActivity : BaseActivity() {
     }
 
     internal fun onHandleTextChange(title: String, description: String) {
-        ui.btnUpdate.run {
-            isEnabled = viewModel.isEnableUpdateButton(title, description)
+        ui.btnUpdate.isEnabled = viewModel.isEnableButton(title, description)
+    }
+
+    internal fun eventOnUpdateClicked(view: View) {
+        if (view.id == R.id.taskDetailActivityBtnUpdate) {
+            val isDone = if (ui.rgStatus.checkedRadioButtonId == R.id.taskDetailActivityRdDone) {
+                DONE
+            } else {
+                DOING
+            }
+            val createTime = task.createTime
+            val updateTime = Date().getTimestamp()
+            val task = Task(
+                    id,
+                    ui.edtTitle.text.toString().trim(),
+                    ui.edtDescription.text.toString().trim(),
+                    isDone,
+                    createTime,
+                    updateTime)
+
+            addDisposables(viewModel.editTask(id, task)
+                    .observeOnUiThread()
+                    .subscribe(this::handleUpdateTaskSuccess, this::handleUpdateTaskError))
         }
     }
 
-    internal fun eventOnViewClicked(view: View) {
-        when (view.id) {
-            R.id.taskDetailActivityBtnUpdate -> {
-                val isDone = if (ui.rgStatus.checkedRadioButtonId == R.id.taskDetailActivityRdDone) {
-                    1
-                } else {
-                    0
-                }
-                val task = Task(id, ui.edtTitle.text.toString().trim(), ui.edtDescription.text.toString().trim(),
-                        isDone, Date().convert(System.currentTimeMillis()), Date().convert(System.currentTimeMillis()))
-
-                addDisposables(viewModel.editTask(id, task)
-                        .observeOnUiThread()
-                        .subscribe(this::handleUpdateTaskSuccess, this::handleUpdateTaskError))
-            }
-            R.id.taskDetailActivityBtnDelete -> {
-                addDisposables(viewModel.deleteTask(id)
-                        .observeOnUiThread()
-                        .subscribe(this::handleDeleteTaskSuccess, this::handleDeleteTaskError))
-            }
+    internal fun eventOnDeleteClicked(view: View) {
+        if (view.id == R.id.taskDetailActivityBtnDelete) {
+            addDisposables(viewModel.deleteTask(id)
+                    .subscribe(this::handleDeleteTaskSuccess, this::handleDeleteTaskError))
         }
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) {
-        ui.progressBar.run {
-            visibility = if (isShow) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+        ui.progressBar.visibility = if (isShow) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 
-    private fun handleGetTaskSuccess(task: Task) {
-        updateUI(task)
+    private fun handleGetTaskSuccess(taskDetail: Task) {
+        task = taskDetail
+        updateUI()
     }
 
     private fun handleGetTaskError(t: Throwable) {
-        toast("get task error")
+        toast("get task error ${t.message}")
     }
 
-    private fun updateUI(task: Task) {
+    private fun updateUI() {
         with(task) {
-            ui.edtTitle.run {
-                setText(title)
-            }
-            ui.edtDescription.run {
-                setText(description)
-            }
-            ui.rgStatus.run {
-                val id = if (isDone == 1) {
+            ui.run {
+                edtTitle.setText(title)
+                edtDescription.setText(description)
+                val id = if (isDone == DONE) {
                     R.id.taskDetailActivityRdDone
                 } else {
                     R.id.taskDetailActivityRdDoing
                 }
-                check(id)
+                rgStatus.check(id)
             }
         }
     }
@@ -117,15 +120,15 @@ class TaskDetailActivity : BaseActivity() {
     }
 
     private fun handleUpdateTaskError(t: Throwable) {
-        toast("update task error")
+        toast("update task error ${t.message}")
     }
 
-    private fun handleDeleteTaskSuccess(unit: Unit) {
+    private fun handleDeleteTaskSuccess() {
         toast("delete task success")
         finish()
     }
 
     private fun handleDeleteTaskError(t: Throwable) {
-        toast("delete task error")
+        toast("delete task error ${t.message}")
     }
 }

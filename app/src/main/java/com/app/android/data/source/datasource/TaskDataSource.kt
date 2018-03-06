@@ -1,6 +1,7 @@
 package com.app.android.data.source.datasource
 
 import com.app.android.data.model.Task
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 /**
@@ -41,5 +42,5 @@ interface TaskDataSource {
      *
      * @param id id of task
      */
-    fun deleteTask(id: Int): Observable<Unit>
+    fun deleteTask(id: Int): Completable
 }

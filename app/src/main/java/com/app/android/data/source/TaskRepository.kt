@@ -3,6 +3,7 @@ package com.app.android.data.source
 import com.app.android.data.model.Task
 import com.app.android.data.source.datasource.TaskDataSource
 import com.app.android.data.source.remote.TaskRemoteDataSource
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 /**
@@ -21,5 +22,5 @@ class TaskRepository : TaskDataSource {
 
     override fun editTask(id: Int, task: Task): Observable<Task> = taskRemoteDataSource.editTask(id, task)
 
-    override fun deleteTask(id: Int): Observable<Unit> = taskRemoteDataSource.deleteTask(id)
+    override fun deleteTask(id: Int): Completable = taskRemoteDataSource.deleteTask(id)
 }
