@@ -3,6 +3,7 @@ package com.app.android.data.source.datasource
 import com.app.android.data.model.Task
 import io.reactivex.Observable
 import io.reactivex.Single
+import retrofit2.Response
 
 /**
  *
@@ -42,5 +43,5 @@ interface TaskDataSource {
      *
      * @param id id of task
      */
-    fun deleteTask(id: Int): Single<Unit>
+    fun deleteTask(id: Int): Single<Response<Unit>>
 }

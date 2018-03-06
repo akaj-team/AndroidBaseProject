@@ -5,6 +5,7 @@ import com.app.android.data.source.datasource.TaskDataSource
 import com.app.android.data.source.remote.TaskRemoteDataSource
 import io.reactivex.Observable
 import io.reactivex.Single
+import retrofit2.Response
 
 /**
  *
@@ -22,5 +23,5 @@ class TaskRepository : TaskDataSource {
 
     override fun editTask(id: Int, task: Task): Single<Task> = taskRemoteDataSource.editTask(id, task)
 
-    override fun deleteTask(id: Int): Single<Unit> = taskRemoteDataSource.deleteTask(id)
+    override fun deleteTask(id: Int): Single<Response<Unit>> = taskRemoteDataSource.deleteTask(id)
 }

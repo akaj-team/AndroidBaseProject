@@ -6,6 +6,7 @@ import com.app.android.data.source.remote.network.ApiClient
 import com.app.android.data.source.remote.network.ApiService
 import io.reactivex.Observable
 import io.reactivex.Single
+import retrofit2.Response
 
 /**
  *
@@ -21,5 +22,5 @@ class TaskRemoteDataSource(private val apiService: ApiService = ApiClient.getIns
 
     override fun editTask(id: Int, task: Task): Single<Task> = apiService.editTask(id, task)
 
-    override fun deleteTask(id: Int): Single<Unit> = apiService.deleteTask(id)
+    override fun deleteTask(id: Int): Single<Response<Unit>> = apiService.deleteTask(id)
 }

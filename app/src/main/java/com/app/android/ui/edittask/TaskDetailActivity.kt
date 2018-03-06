@@ -11,6 +11,7 @@ import com.app.android.ui.base.BaseActivity
 import com.app.android.ui.newtask.TaskViewModel
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
+import retrofit2.Response
 import java.util.*
 
 /**
@@ -124,7 +125,7 @@ class TaskDetailActivity : BaseActivity() {
         toast("update task error ${t.message}")
     }
 
-    private fun handleDeleteTaskSuccess(unit: Unit) {
+    private fun handleDeleteTaskSuccess(response: Response<Unit>) {
         toast("delete task success")
         finish()
     }
