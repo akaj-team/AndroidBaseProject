@@ -68,7 +68,7 @@ class NewTaskActivityUI : AnkoComponent<NewTaskActivity> {
                 isEnabled = false
 
                 onClick {
-                    owner.eventOnSubmitClicked(it!!)
+                    owner.eventOnSubmitClicked()
                     hideKeyboard(ctx)
                 }
             }.lparams {

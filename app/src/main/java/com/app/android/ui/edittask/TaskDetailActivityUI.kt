@@ -93,7 +93,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                     isEnabled = false
 
                     onClick {
-                        owner.eventOnUpdateClicked(it!!)
+                        owner.eventOnUpdateClicked()
                         hideKeyboard(ctx)
                     }
                 }.lparams {
@@ -105,7 +105,7 @@ class TaskDetailActivityUI : AnkoComponent<TaskDetailActivity> {
                     id = R.id.taskDetailActivityBtnDelete
 
                     onClick {
-                        owner.eventOnDeleteClicked(it!!)
+                        owner.eventOnDeleteClicked()
                         hideKeyboard(ctx)
                     }
                 }.lparams {

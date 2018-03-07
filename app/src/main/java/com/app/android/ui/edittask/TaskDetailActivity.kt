@@ -28,8 +28,8 @@ class TaskDetailActivity : BaseActivity() {
 
     private val id by lazy { intent.getIntExtra(KEY_TASK_ID, 0) }
     private lateinit var task: Task
-    private var ui = TaskDetailActivityUI()
     private lateinit var viewModel: TaskViewModel
+    private var ui = TaskDetailActivityUI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,35 +53,31 @@ class TaskDetailActivity : BaseActivity() {
         ui.btnUpdate.isEnabled = viewModel.isEnableButton(title, description)
     }
 
-    internal fun eventOnUpdateClicked(view: View) {
-        if (view.id == R.id.taskDetailActivityBtnUpdate) {
-            val isDone = if (ui.rgStatus.checkedRadioButtonId == R.id.taskDetailActivityRdDone) {
-                DONE
-            } else {
-                DOING
-            }
-            val createTime = task.createTime
-            val updateTime = Date().getTimestamp()
-            val task = Task(
-                    id,
-                    ui.edtTitle.text.toString().trim(),
-                    ui.edtDescription.text.toString().trim(),
-                    isDone,
-                    createTime,
-                    updateTime)
-
-            addDisposables(viewModel.editTask(id, task)
-                    .observeOnUiThread()
-                    .subscribe(this::handleUpdateTaskSuccess, this::handleUpdateTaskError))
+    internal fun eventOnUpdateClicked() {
+        val isDone = if (ui.rgStatus.checkedRadioButtonId == R.id.taskDetailActivityRdDone) {
+            DONE
+        } else {
+            DOING
         }
+        val createTime = task.createTime
+        val updateTime = Date().getTimestamp()
+        val task = Task(
+                id,
+                ui.edtTitle.text.toString().trim(),
+                ui.edtDescription.text.toString().trim(),
+                isDone,
+                createTime,
+                updateTime)
+
+        addDisposables(viewModel.editTask(id, task)
+                .observeOnUiThread()
+                .subscribe(this::handleUpdateTaskSuccess, this::handleUpdateTaskError))
     }
 
-    internal fun eventOnDeleteClicked(view: View) {
-        if (view.id == R.id.taskDetailActivityBtnDelete) {
-            addDisposables(viewModel.deleteTask(id)
-                    .observeOnUiThread()
-                    .subscribe(this::handleDeleteTaskSuccess, this::handleDeleteTaskError))
-        }
+    internal fun eventOnDeleteClicked() {
+        addDisposables(viewModel.deleteTask(id)
+                .observeOnUiThread()
+                .subscribe(this::handleDeleteTaskSuccess, this::handleDeleteTaskError))
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) {

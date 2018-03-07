@@ -2,7 +2,6 @@ package com.app.android.ui.newtask
 
 import android.os.Bundle
 import android.view.View
-import com.app.android.R
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
 import com.app.android.extension.getTimestamp
@@ -40,20 +39,18 @@ class NewTaskActivity : BaseActivity() {
         ui.btnSubmit.isEnabled = viewModel.isEnableButton(title, description)
     }
 
-    internal fun eventOnSubmitClicked(view: View) {
-        if (view.id == R.id.newTaskActivityBtnSubmit) {
-            val time = Date().getTimestamp()
-            val task = Task(
-                    0,
-                    ui.edtTitle.text.toString().trim(),
-                    ui.edtDescription.text.toString().trim(),
-                    DOING,
-                    time,
-                    time)
-            addDisposables(viewModel.createTask(task)
-                    .observeOnUiThread()
-                    .subscribe(this::handleCreateTaskSuccess, this::handleCreateTaskError))
-        }
+    internal fun eventOnSubmitClicked() {
+        val time = Date().getTimestamp()
+        val task = Task(
+                0,
+                ui.edtTitle.text.toString().trim(),
+                ui.edtDescription.text.toString().trim(),
+                DOING,
+                time,
+                time)
+        addDisposables(viewModel.createTask(task)
+                .observeOnUiThread()
+                .subscribe(this::handleCreateTaskSuccess, this::handleCreateTaskError))
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) {
