@@ -1,6 +1,6 @@
 package com.app.android.ui.splash
 
-import android.support.v4.content.ContextCompat
+import android.graphics.Color
 import com.app.android.R
 import org.jetbrains.anko.*
 
@@ -11,7 +11,7 @@ import org.jetbrains.anko.*
 class SplashActivityUI : AnkoComponent<SplashActivity> {
     override fun createView(ui: AnkoContext<SplashActivity>) = with(ui) {
         relativeLayout {
-            backgroundColor = ContextCompat.getColor(ctx, android.R.color.white)
+            backgroundColor = Color.RED
             textView(R.string.app_name).lparams {
                 centerInParent()
             }

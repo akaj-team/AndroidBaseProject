@@ -3,9 +3,12 @@ package com.app.android.data.source.remote.network
 import com.app.android.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.reflect.Type
 
 /**
  *
@@ -14,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class ApiClient private constructor(url: String? = null) {
 
     internal var token: String? = null
-    private var baseUrl: String = if (url == null || url.isEmpty()) "http://172.17.29.7:8080/" else url
+    private var baseUrl: String = if (url == null || url.isEmpty()) "http://172.17.29.7:8089/" else url
 
     companion object : SingletonHolder<ApiClient, String>(::ApiClient)
 
@@ -40,9 +43,16 @@ open class ApiClient private constructor(url: String? = null) {
             chain.proceed(request)
         })
         val client = httpClientBuilder.build()
+        val nullOnEmptyConverterFactory = object : Converter.Factory() {
+            override fun responseBodyConverter(type: Type, annotations: Array<out Annotation>, retrofit: Retrofit): Converter<ResponseBody, Any?>? {
+                val delegate = retrofit.nextResponseBodyConverter<Any?>(this, type, annotations)
+                return Converter { body -> if (body.contentLength() == 0L) null else delegate.convert(body) }
+            }
+        }
         val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(nullOnEmptyConverterFactory)
                 .addCallAdapterFactory(CustomCallAdapterFactory.create())
                 .client(client)
                 .build()

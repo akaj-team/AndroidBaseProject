@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Main screen-->
-    <dimen name="item_task_tv_title_text_size">17dp</dimen>
-    <dimen name="item_task_tv_description_text_size">15dp</dimen>
-    <dimen name="item_task_tv_status_text_size">15dp</dimen>
-    <dimen name="item_task_padding">5dp</dimen>
+    <dimen name="itemTaskTvTitleTextSize">17dp</dimen>
+    <dimen name="itemTaskTvDescriptionTextSize">15dp</dimen>
+    <dimen name="itemTaskTvStatusTextSize">15dp</dimen>
+    <dimen name="itemTaskPadding">5dp</dimen>
+
+    <!--New Task Screen-->
+    <dimen name="newTaskTitleMarginTop">20dp</dimen>
+    <dimen name="newTaskTvTitleTextSize">17dp</dimen>
+    <dimen name="newTaskTvDescriptionTextSize">15dp</dimen>
+    <dimen name="newTaskBtnSubmitTextSize">15dp</dimen>
+    <dimen name="newTaskTvTitleMarginTop">70dp</dimen>
+    <dimen name="newTaskTvDescriptionMarginTop">20dp</dimen>
+    <dimen name="newTaskRlPadding">10dp</dimen>
+    <dimen name="newTaskBtnSubmitMarginTop">30dp</dimen>
+
+    <!--Task Detail Screen-->
+    <dimen name="taskDetailTitleMarginTop">20dp</dimen>
+    <dimen name="taskDetailRlPadding">10dp</dimen>
+    <dimen name="taskDetailTvTitleTextSize">17dp</dimen>
+    <dimen name="taskDetailTvTitleMarginTop">70dp</dimen>
+    <dimen name="taskDetailTvDescriptionTextSize">15dp</dimen>
+    <dimen name="taskDetailTvDescriptionMarginTop">20dp</dimen>
+    <dimen name="taskDetailBtnUpdateMarginTop">30dp</dimen>
 </resources>

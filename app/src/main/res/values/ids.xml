@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--View ids for TaskItemUI-->
-    <item name="item_task_title" type="id" />
-    <item name="item_task_description" type="id" />
-    <item name="item_task_status" type="id" />
+    <item name="itemTaskTitle" type="id" />
+    <item name="itemTaskDescription" type="id" />
+    <item name="itemTaskStatus" type="id" />
 
     <!--View ids for toolbar menu-->
-    <item name="menu_add_task" type="id" />
+    <item name="menuAddTask" type="id" />
 
     <!--View ids for MainActivity-->
-    <item name="main_activity_tool_bar" type="id" />
+    <item name="mainActivityToolbar" type="id" />
+
+    <!--View ids for NewTaskActivity-->
+    <item name="newTaskActivityTvTitle" type="id" />
+    <item name="newTaskActivityEdtTitle" type="id" />
+    <item name="newTaskActivityEdtDescription" type="id" />
+    <item name="newTaskActivityBtnSubmit" type="id" />
+
+    <!--View ids for TaskDetailActivity-->
+    <item name="taskDetailActivityTvTitle" type="id" />
+    <item name="taskDetailActivityEdtTitle" type="id" />
+    <item name="taskDetailActivityEdtDescription" type="id" />
+    <item name="taskDetailActivityBtnUpdate" type="id" />
+    <item name="taskDetailActivityBtnDelete" type="id" />
+    <item name="taskDetailActivityRdGroup" type="id" />
+    <item name="taskDetailActivityRdDone" type="id" />
+    <item name="taskDetailActivityRdDoing" type="id" />
 </resources>

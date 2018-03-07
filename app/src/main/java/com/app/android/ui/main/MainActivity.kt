@@ -3,22 +3,25 @@ package com.app.android.ui.main
 import android.os.Bundle
 import android.support.v7.util.DiffUtil
 import android.view.View
+import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
 import com.app.android.extension.observeOnUiThread
-import com.uniqlo.circle.ui.base.BaseActivity
+import com.app.android.ui.base.BaseActivity
+import com.app.android.ui.edittask.TaskDetailActivity
+import com.app.android.ui.newtask.NewTaskActivity
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity() {
 
     private lateinit var ui: MainActivityUI
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = MainActivityViewModel(TaskRepository())
+        viewModel = MainViewModel(TaskRepository())
         ui = MainActivityUI(viewModel.tasks)
         ui.setContentView(this)
-        viewModel.getTasks()
     }
 
     override fun onBindViewModel() {
@@ -30,7 +33,10 @@ class MainActivity : BaseActivity() {
                 //Update task list
                 viewModel.updateListTask
                         .observeOnUiThread()
-                        .subscribe(this::handleUpdateListTask))
+                        .subscribe(this::handleUpdateListTask),
+                viewModel.getTasks()
+                        .observeOnUiThread()
+                        .subscribe())
     }
 
     private fun handleProgressBarStatus(isShow: Boolean) = if (isShow) {
@@ -49,12 +55,16 @@ class MainActivity : BaseActivity() {
     }
 
     internal fun handleSwipeRefreshLayoutOnRefresh() {
-        viewModel.getTasks()
+        addDisposables(viewModel.getTasks()
+                .observeOnUiThread()
+                .subscribe())
     }
 
-    internal fun eventTaskItemClicked() {
+    internal fun eventTaskItemClicked(task: Task) {
+        startActivity<TaskDetailActivity>(TaskDetailActivity.KEY_TASK_ID to task.id)
     }
 
     internal fun eventAddNewTaskClicked() {
+        startActivity<NewTaskActivity>()
     }
 }

@@ -3,7 +3,7 @@ package com.app.android.extension
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import com.uniqlo.circle.ui.base.BaseFragment
+import com.app.android.ui.base.BaseFragment
 
 /**
  * Use this extension for Fragment, FragmentTransaction

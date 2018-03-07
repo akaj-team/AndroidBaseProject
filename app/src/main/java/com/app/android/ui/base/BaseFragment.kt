@@ -1,4 +1,4 @@
-package com.uniqlo.circle.ui.base
+package com.app.android.ui.base
 
 import android.support.v4.app.Fragment
 import io.reactivex.disposables.CompositeDisposable
