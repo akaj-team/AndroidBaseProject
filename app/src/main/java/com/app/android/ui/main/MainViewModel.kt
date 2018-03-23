@@ -4,6 +4,7 @@ import android.support.v7.util.DiffUtil
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
 import com.app.android.ui.base.Diff
+import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -12,12 +13,13 @@ import io.reactivex.subjects.PublishSubject
  *
  * @author at-vinhhuynh
  */
-class MainViewModel(private val taskRepository: TaskRepository) {
-    internal var progressBarStatus = BehaviorSubject.create<Boolean>()
-    internal val updateListTask = PublishSubject.create<DiffUtil.DiffResult>()
-    internal var tasks = mutableListOf<Task>()
+class MainViewModel(private val taskRepository: TaskRepository) : MainContractViewModel {
 
-    internal fun getTasks() = taskRepository.getListTask()
+    private var progressBarStatus = BehaviorSubject.create<Boolean>()
+    private val updateListTask = PublishSubject.create<DiffUtil.DiffResult>()
+    private var tasks = mutableListOf<Task>()
+
+    private fun getTaskApi() = taskRepository.getListTask()
             .doOnSubscribe {
                 progressBarStatus.onNext(true)
             }
@@ -46,4 +48,18 @@ class MainViewModel(private val taskRepository: TaskRepository) {
                 tasks.addAll(it)
                 updateListTask.onNext(diff)
             }
+
+    override fun getListTask(): Observable<Unit> {
+        return getTaskApi()
+    }
+
+    override fun getProgressbarStatus(): BehaviorSubject<Boolean> {
+        return progressBarStatus
+    }
+
+    override fun updateListTask(): PublishSubject<DiffUtil.DiffResult> {
+        return updateListTask
+    }
+
+    internal fun getTasks() = tasks
 }

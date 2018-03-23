@@ -7,8 +7,8 @@ import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
 import com.app.android.extension.observeOnUiThread
 import com.app.android.ui.base.BaseActivity
-import com.app.android.ui.edittask.TaskDetailActivity
-import com.app.android.ui.newtask.NewTaskActivity
+import com.app.android.ui.task.edittask.TaskDetailActivity
+import com.app.android.ui.task.newtask.NewTaskActivity
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 
@@ -20,21 +20,21 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = MainViewModel(TaskRepository())
-        ui = MainActivityUI(viewModel.tasks)
+        ui = MainActivityUI(viewModel.getTasks())
         ui.setContentView(this)
     }
 
     override fun onBindViewModel() {
         addDisposables(
                 //Update progress bar status
-                viewModel.progressBarStatus
+                viewModel.getProgressbarStatus()
                         .observeOnUiThread()
                         .subscribe(this::handleProgressBarStatus),
                 //Update task list
-                viewModel.updateListTask
+                viewModel.updateListTask()
                         .observeOnUiThread()
                         .subscribe(this::handleUpdateListTask),
-                viewModel.getTasks()
+                viewModel.getListTask()
                         .observeOnUiThread()
                         .subscribe())
     }
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
     }
 
     internal fun handleSwipeRefreshLayoutOnRefresh() {
-        addDisposables(viewModel.getTasks()
+        addDisposables(viewModel.getListTask()
                 .observeOnUiThread()
                 .subscribe())
     }

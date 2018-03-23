@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.app.android.R
 import com.app.android.data.model.Task
-import com.app.android.ui.edittask.TaskDetailActivity.Companion.DONE
+import com.app.android.ui.task.edittask.TaskDetailActivity.Companion.DONE
 import org.jetbrains.anko.*
 
 /**

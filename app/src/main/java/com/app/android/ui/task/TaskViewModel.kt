@@ -1,4 +1,4 @@
-package com.app.android.ui.newtask
+package com.app.android.ui.task
 
 import com.app.android.data.model.Task
 import com.app.android.data.source.TaskRepository
