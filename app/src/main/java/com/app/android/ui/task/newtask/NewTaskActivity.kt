@@ -31,7 +31,7 @@ class NewTaskActivity : BaseActivity() {
     override fun onBindViewModel() {
         addDisposables(
                 //Update progress bar status
-                viewModel.progressBarStatus
+                viewModel.getProgressbarStatus()
                         .observeOnUiThread()
                         .subscribe(this::handleProgressBarStatus))
     }

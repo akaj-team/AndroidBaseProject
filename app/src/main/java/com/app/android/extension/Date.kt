@@ -8,6 +8,6 @@ import java.util.*
  * Created by trung.nguyen on 3/1/18.
  */
 fun Date.getTimestamp(): String {
-    val format = SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.JAPANESE)
+    val format = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.JAPANESE)
     return format.format(this)
 }
