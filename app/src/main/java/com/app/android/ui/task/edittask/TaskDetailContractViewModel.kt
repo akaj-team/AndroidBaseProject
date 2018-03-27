@@ -10,8 +10,14 @@ import retrofit2.Response
  * Created by trung.nguyen on 3/26/18.
  */
 interface TaskDetailContractViewModel {
+
     fun getTaskDetail(id: Int): Single<Task>
+
     fun editTask(id: Int, task: Task): Single<Task>
+
     fun deleteTask(id: Int): Single<Response<Unit>>
+
     fun getProgressbarStatus(): BehaviorSubject<Boolean>
+
+    fun isEnableButton(title: String, description: String): Boolean
 }

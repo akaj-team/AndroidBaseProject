@@ -19,38 +19,36 @@ class MainViewModel(private val taskRepository: TaskRepository) : MainContractVi
     private val updateListTask = PublishSubject.create<DiffUtil.DiffResult>()
     private var tasks = mutableListOf<Task>()
 
-    private fun getTaskApi() = taskRepository.getListTask()
-            .doOnSubscribe {
-                progressBarStatus.onNext(true)
-            }
-            .doFinally {
-                progressBarStatus.onNext(false)
-            }
-            .onErrorReturn {
-                listOf()
-            }
-            .observeOn(Schedulers.computation())
-            .map {
-                val diff = Diff(tasks, it)
-                        .areItemsTheSame { oldItem, newItem ->
-                            oldItem.id == newItem.id
-                        }
-                        .areContentsTheSame { oldItem, newItem ->
-                            oldItem.title == newItem.title
-                            oldItem.description == newItem.description
-                            oldItem.isDone == newItem.isDone
-                            oldItem.createTime == newItem.createTime
-                            oldItem.updateTime == newItem.updateTime
-                        }
-                        .calculateDiff()
+    override fun getListTaskFromApi(): Observable<Unit> {
+        return taskRepository.getListTask()
+                .doOnSubscribe {
+                    progressBarStatus.onNext(true)
+                }
+                .doFinally {
+                    progressBarStatus.onNext(false)
+                }
+                .onErrorReturn {
+                    listOf()
+                }
+                .observeOn(Schedulers.computation())
+                .map {
+                    val diff = Diff(tasks, it)
+                            .areItemsTheSame { oldItem, newItem ->
+                                oldItem.id == newItem.id
+                            }
+                            .areContentsTheSame { oldItem, newItem ->
+                                oldItem.title == newItem.title
+                                oldItem.description == newItem.description
+                                oldItem.isDone == newItem.isDone
+                                oldItem.createTime == newItem.createTime
+                                oldItem.updateTime == newItem.updateTime
+                            }
+                            .calculateDiff()
 
-                tasks.clear()
-                tasks.addAll(it)
-                updateListTask.onNext(diff)
-            }
-
-    override fun getListTask(): Observable<Unit> {
-        return getTaskApi()
+                    tasks.clear()
+                    tasks.addAll(it)
+                    updateListTask.onNext(diff)
+                }
     }
 
     override fun getProgressbarStatus(): BehaviorSubject<Boolean> {
@@ -61,5 +59,7 @@ class MainViewModel(private val taskRepository: TaskRepository) : MainContractVi
         return updateListTask
     }
 
-    internal fun getTasks() = tasks
+    override fun getListTask(): MutableList<Task> {
+        return tasks
+    }
 }

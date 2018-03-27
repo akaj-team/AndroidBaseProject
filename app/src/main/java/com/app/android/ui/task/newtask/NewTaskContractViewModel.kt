@@ -9,6 +9,10 @@ import io.reactivex.subjects.BehaviorSubject
  * Created by trung.nguyen on 3/26/18.
  */
 interface NewTaskContractViewModel {
+
     fun createTask(task: Task): Single<Task>
+
     fun getProgressbarStatus(): BehaviorSubject<Boolean>
+
+    fun isEnableButton(title: String, description: String): Boolean
 }

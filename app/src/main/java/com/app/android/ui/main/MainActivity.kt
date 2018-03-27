@@ -20,7 +20,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = MainViewModel(TaskRepository())
-        ui = MainActivityUI(viewModel.getTasks())
+        ui = MainActivityUI(viewModel.getListTask())
         ui.setContentView(this)
     }
 
@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
                 viewModel.updateListTask()
                         .observeOnUiThread()
                         .subscribe(this::handleUpdateListTask),
-                viewModel.getListTask()
+                viewModel.getListTaskFromApi()
                         .observeOnUiThread()
                         .subscribe())
     }
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
     }
 
     internal fun handleSwipeRefreshLayoutOnRefresh() {
-        addDisposables(viewModel.getListTask()
+        addDisposables(viewModel.getListTaskFromApi()
                 .observeOnUiThread()
                 .subscribe())
     }

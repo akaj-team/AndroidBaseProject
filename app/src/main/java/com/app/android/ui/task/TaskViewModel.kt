@@ -59,5 +59,7 @@ class TaskViewModel(private val taskRepository: TaskRepository): NewTaskContract
         return progressBarStatus
     }
 
-    internal fun isEnableButton(title: String, description: String) = !title.isBlank() && !description.isBlank()
+    override fun isEnableButton(title: String, description: String): Boolean {
+        return !title.isBlank() && !description.isBlank()
+    }
 }

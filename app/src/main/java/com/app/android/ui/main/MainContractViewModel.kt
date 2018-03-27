@@ -11,7 +11,12 @@ import io.reactivex.subjects.PublishSubject
  * Created by trung.nguyen on 3/23/18.
  */
 interface MainContractViewModel {
+
     fun getProgressbarStatus(): BehaviorSubject<Boolean>
+
     fun updateListTask(): PublishSubject<DiffUtil.DiffResult>
-    fun getListTask(): Observable<Unit>
+
+    fun getListTaskFromApi(): Observable<Unit>
+
+    fun getListTask(): MutableList<Task>
 }
