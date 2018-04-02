@@ -13,7 +13,7 @@ import retrofit2.Response
  * Created by trung.nguyen on 2/28/18.
  */
 class TaskViewModel(private val taskRepository: TaskRepository): NewTaskContractViewModel, TaskDetailContractViewModel {
-    private var progressBarStatus = BehaviorSubject.create<Boolean>()
+    private val progressBarStatus = BehaviorSubject.create<Boolean>()
 
     override fun getTaskDetail(id: Int): Single<Task> {
         return taskRepository.getTaskDetail(id)

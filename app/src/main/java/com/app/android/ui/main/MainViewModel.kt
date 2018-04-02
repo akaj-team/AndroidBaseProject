@@ -15,9 +15,9 @@ import io.reactivex.subjects.PublishSubject
  */
 class MainViewModel(private val taskRepository: TaskRepository) : MainContractViewModel {
 
-    private var progressBarStatus = BehaviorSubject.create<Boolean>()
+    private val progressBarStatus = BehaviorSubject.create<Boolean>()
     private val updateListTask = PublishSubject.create<DiffUtil.DiffResult>()
-    private var tasks = mutableListOf<Task>()
+    private val tasks = mutableListOf<Task>()
 
     override fun getListTaskFromApi(): Observable<Unit> {
         return taskRepository.getListTask()
