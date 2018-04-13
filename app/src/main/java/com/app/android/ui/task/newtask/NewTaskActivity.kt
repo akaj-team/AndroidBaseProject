@@ -1,4 +1,4 @@
-package com.app.android.ui.newtask
+package com.app.android.ui.task.newtask
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,8 @@ import com.app.android.data.source.TaskRepository
 import com.app.android.extension.getTimestamp
 import com.app.android.extension.observeOnUiThread
 import com.app.android.ui.base.BaseActivity
-import com.app.android.ui.edittask.TaskDetailActivity.Companion.DOING
+import com.app.android.ui.task.TaskViewModel
+import com.app.android.ui.task.edittask.TaskDetailActivity.Companion.DOING
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
 import java.util.*
@@ -30,7 +31,7 @@ class NewTaskActivity : BaseActivity() {
     override fun onBindViewModel() {
         addDisposables(
                 //Update progress bar status
-                viewModel.progressBarStatus
+                viewModel.getProgressbarStatus()
                         .observeOnUiThread()
                         .subscribe(this::handleProgressBarStatus))
     }

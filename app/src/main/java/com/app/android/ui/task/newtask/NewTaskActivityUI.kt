@@ -1,4 +1,4 @@
-package com.app.android.ui.newtask
+package com.app.android.ui.task.newtask
 
 import android.graphics.Color
 import android.text.InputType

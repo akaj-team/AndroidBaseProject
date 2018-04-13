@@ -1,4 +1,4 @@
-package com.app.android.ui.edittask
+package com.app.android.ui.task.edittask
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,7 @@ import com.app.android.data.source.TaskRepository
 import com.app.android.extension.getTimestamp
 import com.app.android.extension.observeOnUiThread
 import com.app.android.ui.base.BaseActivity
-import com.app.android.ui.newtask.TaskViewModel
+import com.app.android.ui.task.TaskViewModel
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
 import retrofit2.Response
@@ -40,7 +40,7 @@ class TaskDetailActivity : BaseActivity() {
     override fun onBindViewModel() {
         addDisposables(
                 //Update progress bar status
-                viewModel.progressBarStatus
+                viewModel.getProgressbarStatus()
                         .observeOnUiThread()
                         .subscribe(this::handleProgressBarStatus),
                 //Get task detail

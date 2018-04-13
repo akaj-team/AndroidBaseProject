@@ -21,9 +21,9 @@
 
         <activity android:name=".ui.main.MainActivity" />
 
-        <activity android:name=".ui.newtask.NewTaskActivity" />
+        <activity android:name=".ui.task.newtask.NewTaskActivity" />
 
-        <activity android:name=".ui.edittask.TaskDetailActivity" />
+        <activity android:name=".ui.task.edittask.TaskDetailActivity" />
     </application>
 
 </manifest>

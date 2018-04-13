@@ -1,4 +1,4 @@
-package com.app.android.ui.edittask
+package com.app.android.ui.task.edittask
 
 import android.graphics.Color
 import android.text.InputType
